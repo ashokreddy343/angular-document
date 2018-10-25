@@ -1,0 +1,226 @@
+Angular
+	A framework for building client applications in HTML,CSS,and javascript/Typescript
+Benefits of using Angualr
+	Gives out applications a clean structure
+	includes a lot of re-usable code
+	Makes our applications more testable
+node --version
+npm --version
+npm i -g @angular/cli
+ng --version
+ng new hello-world
+code.visualstudio.com
+ng serve 
+ng serve -o
+every application has atleast one module and one component
+configuration settings in enviornments folder
+ployfills.ts handles latest features of javascript support all browsers
+
+.editiorconfig :it is used to maintain common settings to all the developers
+
+karma for test runner for angualr
+package.json :every node project has this file
+protractor for end to end testing
+tsconfig.json :typescript related changes
+tslint : static analysis tool
+
+webpack
+	it's build automation tool
+	hot module replacement using webpack
+Angular version history
+	2010-angular js
+
+Typescript Fundamentals
+	it's superset of javascript
+	strong typing
+	object-oriented features
+	compile-time errors
+	Typescript transpile into javascript code
+	npm i -g typescript
+	tsc --version
+	tsc main.ts(compile typescript file)
+	node main.js (run javascript file)
+
+	Declaring a varible
+		var number=1;
+		let count=2
+	ES5(ECMAScript 5):supported by all browsers
+	ES6
+	using let it prevent lot of issues
+	rm main.js
+	
+	Types
+		let a:number;
+		let b:boolean;
+		let c:string;
+		let d:any;
+		let e:number[]=[1,23,34];
+		let f:any[]==[1,true,'a',false];
+		enum Color{Red,Green,Blue};
+		let backgroundColor=Color.Red;
+		
+	Type Assertions:
+		it will give inteleginece all methods in string
+		
+	Arrow functions
+		let doLog=(message)=>{
+			console.log(message)}
+		let doLog=()=>console.log("some message")
+	
+	Interfaces
+		interface Point{
+			x:number
+			y:number
+		}
+	
+	Classes
+		Groups varibles(properties) and functions(methods) that are highly related.
+	objects
+	constructor
+	Access Modifiers
+		public,private,protected
+		members:varibles+methods
+	Access Modifiers in Constructor parameters
+	Properties
+	Modules
+		export class Point
+		import {Point} from './point'
+
+example:
+
+liek.component.ts
+
+export class LikeComponent{
+
+	constructor(public lieksCount:number,public isSelected:boolean){
+	}
+	
+	onClick(){
+	if(this.
+	}
+
+Angular fundamentals
+	Building Blocks of Angular Apps
+		Components
+			Data+HTML Template +Logic
+			to make the typescript class to component we have to add decorators to that class
+			1.create a component
+			import {Component} from '@angular/core';
+			@Component({
+				selector:'courses',
+				template:'<h2>Courses</h2>'
+			})
+
+			Creating component using angular CLI
+				ng g c course(four filse .html,.css,.ts,.spec.ts)
+						
+		Modules
+			modules is a container 
+note:auto import visual studio code extension
+
+import {Component} from '@angular/core';
+import {CoursesService} from './CoursesService'
+
+@Component({
+	selector:'courses'
+	//template:'<h2>{{title}}</h2> //interpolation
+	template:`
+		<h2>{{title}}</h2>
+		<ul>
+		   <li *ngFor="let course of courses">{{course}}</li> //ngFor Directive
+		</ul>`					
+})
+
+export class CourseComponent{
+	title:string="List of Courses"
+	//courses:string[]=["course1","course2","course3"]
+	courses;
+	constructor(service:CoursesService){ //DI
+		this.courses=service.getCourses()
+	}
+}
+DI:injecting or providing class to constructor
+courses.service.ts
+
+export class CoursesService{
+	getCourses(){
+		return ["course1","course2","course3"]
+	}
+}
+
+we have to add all services in Provider section in app component.
+create service using angular CLI
+	ng g s email(spec.ts,.ts)
+@inectable
+	it is a decorator
+	it will tell DI is possible through class
+	class can not have any decorats and it has dependcies we can use injectable
+
+Displaying Data and Handling Events
+	Property Binding
+		<h2>{{title}}</h2> //interpolation
+		<h2 [textContent]="title"></h2> //property binding
+		<img src="{{imageUrl}}"/> //interploation
+		<img [src]="imageUrl"/> //property Binding
+		wherever we render text we can use string interpolation
+	Attribute Binding
+		<td [attr.colspa]="colspan"></td>
+	Adding Bootstrap
+		npm i bootstrap --save
+		in styles.css file add like below
+		@import "~bootstrap/dist/css/bootstrap.css"
+
+	class binding
+	<button [class.active]="isActive"></button>
+	style binding
+		<button [style.backgroundColor]="isActive? 'blue':'green'" ></button>
+	Event Binding
+		<button (click)="onSave()"></button>		
+		<button (click)="onSave($event)"></button> //is dom event
+		$event.stopPropgation()
+	Event Filtering
+		<input (keyup)="onKeyUp($event)"/>
+		onKeyUp($event){
+			if($event.keyCode===13)console.log("Enter was Pressed")
+			} 
+		or
+		<input (keyup.enter)="onKeyUp($event)"/>
+		get value from text box we can use like this $event.input.value
+	Template Varibles
+		<input #email (keyup.enter)="onKeyUp(email.value)  type="text"/>
+	Two-way data binding
+		<input type="text" [(ngModel)]="email"/>		
+		ngModel available in the following module
+		import {FormsModule} from '@angular/forms'				
+imports:All in build angular modules in imports array
+declarations:all custom components and pipes are declared in declarations
+providers:services are providers
+	
+	Pipes
+		it is used to format the data
+		Uppercase,Lowercase,Decimal,Currency,Percent
+		{{title | uppercase}}
+		{{title | uppercase | lowercase}}
+		{{rating | number:'1.2-2'}}
+		{{price | currency:'AUD':true:'3.2-2'}}
+summary.pipe.ts
+import {Pipe,PipeTransform} from '@angular/core';
+@Pipe({
+  name:'summary'
+})
+
+export class SummaryPipe implements PipeTransform{
+	transform(value:any,args?:any){
+	  if(!value)
+	{
+		return null;	  
+	}
+	else
+	{
+	  return value.substr()
+	}
+}
+
+Building ReUsable Components
+	Component API
+	Input Properties
