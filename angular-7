@@ -1,0 +1,27 @@
+How to Update angular 7 ?
+  For updating Angular 6 to Angular 7, you should use a command
+      ng update @angular/cli @angular/core
+Let’s introduce added and modified new features of Angular 7
+  1.Added new interface -UrlSegment[] to CanLoad interface
+  2.Added new interface -DoBootstrap interface
+  3.Angular 7 added new compiler -Compatability compiler(ngcc)
+  4.Introduce new pipe called -KeyValuePipe
+  5.Angular 7 now supporting to Typescript 2.9
+  6.Added a new elements features - enable Shadow DOM v1 and slots
+  7.Added a new router features - warn if navigation triggered outside Angular zone
+  8.Added a new mappings for ngfactory  and ngsummary files to their module names in AOT summary resolver
+  9.Added a new "original" placeholder value on extracted XMB
+  10.Added a new ability to recover from malformed URLs
+  11.Added a new compiler support dot (.) in import statements and also avoid a crash in ngc-wrapped
+  12.Update compiler to flatten nested template fns
+Bug Fixes
+  1.Now using performance.mark() instead of console.time()
+  2.Upgrade to trigger $destroy event on upgraded component element
+Bug fixes on the core
+  1.do not clear element content when using shadow dom
+  2.size regression with closure compiler
+  3.Add a new hostVars and support pure functions in host bindings
+ Bug fixes on elements
+  1.Added a new compiler dependency
+  2.Added a new compiler to integration
+  
