@@ -1,0 +1,69 @@
+Keep and try to upgrading Angular, the Angular’s community has announced Angular releases in every 6 months and its looks like -
+  Angular 5 is in Oct 2017
+  Angular 6 is in Mar 2018 and
+  Angular 7 is in Oct 2018
+angular 5 features
+  1. Make AOT the default
+  2.Watch mode
+  3.Type checking in templates
+  4.More flexible metadata
+  5. Remove *.ngfactory.ts files
+  6.Better error messages
+  7.Smooth upgrades
+  8.Tree-Shakeable components
+  9.Hybrid Upgrade Application
+  
+Angular 5 Performance Improvements - Angular 5
+  1.Use of addEventListener for the faster rendering and it is the core functionality.
+  2.Update to new version of build-optimizer.
+  3.Added some Improvements on the abstract class methods and interfaces
+  4.Remove decorator DSL which depends on Reflect for Improve the Performance of Apps and This is the core functionality.
+  5.Added an option to remove blank text nodes from compiled templates
+  6.Switch Angular to use Static-Injector instead of Reflective-Injector.
+  7.Improve the applications testing.
+  8.Improve the performance of hybrid applications
+  9.Improvements on Lazy loading for Angular  
+
+Some Improvement on HttpClient
+  1.Improvement on Type-checking the response
+  2.Improvement on Reading the full response
+  3.Improvement on Error handling and fetching error details
+  4.Improvement on Intercepting all requests or responses
+  5. Improvement on Logging
+  6. Improvement on Caching
+  7.Improvement on XSRF Protection
+Added Features - Angular 5
+1.     Added Representation of Placeholders to xliff and xmb in the compiler
+2.     Added an Options Arg to Abstract Controls in the forms controls
+3.     Added add default updateOn values for groups and arrays to form controls
+4.     Added updateOn blur option to form controls
+5.     Added updateOn submit option to form controls
+6.     Added an Events Tracking Activation of Individual Routes
+7.     Added NgTemplateOutlet API as stable in the common controls
+8.     Create StaticInjector which does not depend on Reflect polyfill
+9.     Added [@.disabled] attribute to disable animation children in the animations
+
+Router Life Cycle Events – Angular 5
+Added new router life cycle events for Guards and Resolvers -
+1.     GuardsCheckStart,
+2.     GuardsCheckEnd,
+3.     ResolveStart and
+4.     ResolveEnd
+Angular 5 Bug Fixes - Angular 5
+1.     Fixed compilation error by using the correct type for providers
+2.     Skip PWA test when redeploying non-public commit
+3.     Don't strip CSS source maps. This is the compiler related fix
+4.     Remove tsickle (language-service) dependency
+5.     Support persisting dynamic styles within animation states
+6.     Ignore @import in multi-line css
+7.     Fix platform-browser-dynamic
+8.     Forbid destroyed views to be inserted or moved in VC
+9.     Support persisting dynamic styles within animation states
+
+
+
+
+  
+  
+  
+  
