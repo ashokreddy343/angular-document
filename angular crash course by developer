@@ -224,3 +224,133 @@ export class SummaryPipe implements PipeTransform{
 Building ReUsable Components
 	Component API
 	Input Properties
+input properites
+	@Input()  isFavorite:boolean;//Decorator available in @angular/core
+	or
+	@Component({
+	  selector:'favorite',
+	  templateUrl:'./sample.html',
+	  inputs:['isFavorite']
+output properites
+	@Output() change=new EventEmitter() //EventEmitter it's available 
+	onClick(){
+	 this.change.emit();
+	}
+Passing Event Data
+	onClick(){
+	 this.change.emit({newValue:this.isSelected});
+	}
+	@Output('change') click=new EventEmitter() //alias name
+Templates
+	if we have more than five lines of code we can use templateUrl or use template
+	no separate request to call these templates 
+Styles
+	three ways can apply styles
+	  1.styleUrls in @Component meta data
+	  2.styles:[``]
+Shadow DOM
+	Allows us to apply scoped styles to elements
+	without bleeding out to the outer world
+View Encasulation
+	@Component({
+	encapsulation:ViewEncapsulation.Emulated //ViewEncapsulation.Native
+	})
+
+ngContent
+	<ng-content select=".heading"></ng-content>
+	you don't need a selector if you have only one ng-content
+ngContainer
+	
+
+Directives
+	Builtindirectives ngFor,ngIf,ngSwitchCase,ngClass,ngStyle
+	structural :Modify the structure of the DOM
+	Attribute : Modify the attributes of DOM elements
+	<div *ngIf="courses.length>0;else noCourses">
+	 List of Couses
+	</div>
+	<ng-template #noCourses>
+		No Courses yet
+	</ng-template>	
+
+	or
+	<div *ngIf="courses.length>0; then courseList else noCourses"></div>
+	<ng-template>List of courses</ng-template>
+	<ng-template #noCourses>
+		No Courses yet
+	</ng-template>	
+	
+Hidden Property
+	<div [hidden]="courses.length>0">
+	  List of Couses
+	</div>
+	<div [hidden]="courses.length==0">
+	  No Courses yet
+	</div>
+
+For Large elements trees - use *ngIf
+For small element trees	 -use [hidden]
+
+ngSwitchCase
+	<div [ngSwitch]="viewMode">
+	     <div *ngSwitchCase="'map'">Map</div>
+	     <div *ngSwitchCase="'list'">List</div>
+	     <div *ngSwitchDefault>otherwise</div>
+	</div>
+
+ngFor
+	<li *ngFor="let course of courses;index as i">{{i}}-{{course.name}}</li>		
+	index,first,last,even,odd these are the exported values avalible 
+
+ngFor and Change Detection
+ngFor and TrackBy
+	<li *ngFor="let course of courses;trackby">{{course.name}}</li>
+	use trackBy when you need
+	
+The Leading Asterisk
+	using * angular rewite ng-template with [ngIf] directive
+ngClass
+	[ngClass]="{glyphicon-star}"
+ngStyle
+	[ngStyle]="{'backgroundColor':'blue','color':'white'}"
+SafeTraversal Operator
+	<span>{{task.assignee?.name}}</span>
+creating custom directives
+	ng g d input-format
+	import {Directive,HostListener,ElementRef} from '@angular/core'
+	@Directive({
+	  selector:'[appInputFormat]'
+	})
+	export class InputFormatDirective{
+	   constructor(private el:ElementRef){}
+		@HostListener('focus') onFocus(){
+		 let value:string=this.ele.nativeElement.value;
+		 this.el.nativeElement=value.toLowerCase();
+		}
+
+	}
+	<input type="text" appInputFormat>
+	
+Template-driven Forms
+	Types of forms
+	 1.Template 2.Reactive
+	 Reactive
+	   More control over validaion logic
+	   Good for complex forms
+	   Unit testable
+	Template-driven
+	 Good for simple forms
+	 Simple Validation
+	 Easier to create
+	 Less Code
+ngModel
+	<form>
+	<input id="firstName" ngModel name="firstName" id="firstName"/> //ngModel name="firstName" template drivem approach
+	</form> 							
+	dirty -pristine
+	valid-invalid
+	touched-untouched
+
+Adding validation
+	<input id="firstName" ngModel name="firstName" id="firstName" required/>		
+specific validation errors
