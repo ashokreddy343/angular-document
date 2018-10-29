@@ -55,7 +55,19 @@ Generate code from Blueprints
   ng g compnent per --inline-tempalte --inline-style
   ng g c pet --flat without folder component created
 generating directives
+  ng g d search-box
+  ng g d search-box --flat=false
+generating services
+  ng g s sales-data 
+generating classes,interfaces
+  ng g cl models/customer
+  ng g i models/person
+generating pipes
+  ng g p init-caps 
+  ng g p shared/init-caps -m app.module
   
+generating NgModules
+  ng g m login 
   
 
 
