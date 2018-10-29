@@ -1,0 +1,68 @@
+ng generate  ng g
+ng lint     ng l
+ng build    ng b
+ng serve    ng s
+ng test     
+ng e2e
+ng doc
+ng help
+
+npm i -g @angular/cli
+ng new my-dream-app
+ng serve
+ng serve -o
+ng doc component
+ng --help
+ng test
+ng e2e
+ng build
+
+Angular CLI Requirements
+  node -v
+  angular supports  node 8.x or higher
+  npm -v   npm 5.x or higher
+  npm i @angular/cli -g
+  ng -v
+  npm list -g @angular/cli --depth=0
+  ng new ngtest --skip-install
+angular extension for vscode
+  Angular Essentials
+Refer to the Angular CLI Websites
+https://github.com/angular/angular-cli/wiki
+
+Generating a new Angular Application
+  ng new my-app
+  ng new my-app --dry-run
+  ng new my-app --skip-install
+  ng new my-app --help
+
+angular.json file
+  ng new my-app --prefix acme --skip-install
+  ng new my-app --prefix acme --skip-tests --skip-install
+  ng new my-app --routing --styles scss
+  ng new my-app --style scss
+                --prefix ma
+                --skip-git
+                --skip-tests
+                --routing
+  ng lint my-app --help
+  ng lint my-app --format stylish
+  ng lint my-app --fix
+Generate code from Blueprints
+  ng g component customer
+  ng g service customer-data
+  ng g classs customer-model
+  ng g compnent per --inline-tempalte --inline-style
+  ng g c pet --flat without folder component created
+generating directives
+  
+  
+
+
+
+
+
+
+
+  
+  
