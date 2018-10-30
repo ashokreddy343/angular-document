@@ -354,3 +354,17 @@ ngModel
 Adding validation
 	<input id="firstName" ngModel name="firstName" id="firstName" required/>		
 specific validation errors
+	<input id="firstName" ngModel name="firstName" id="firstName" minlength="3" maxlength="10" required/>		
+Styling Invalid Input Fields
+Cleaner Templates
+ngForm
+	formControl represents one control
+	formGroup reperesents group of control
+ngModelGroup
+Disabling the submit button
+	
+	
+	
+
+
+
