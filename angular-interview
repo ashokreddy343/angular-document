@@ -1,0 +1,77 @@
+1.What Are The New Features Of Angular 2? Why You Used Angular 2?
+  Component based
+  Directives
+  DI
+  Typescript support
+  Generics
+  Forms and Validations
+Why You Used Angular 2?
+  1.It is entirely component based.
+  2.Better change detection
+  3.Angular2 has better performance.
+  4.Angular2 has more powerful template system.
+  5.Angular2 provide simpler APIs, lazy loading and easier to application debugging.
+  6.Angular2 much more testable
+  7.Angular2 provides to nested level components.
+  8.Ahead of Time compilation (AOT) improves rendering speed
+  9.Angular2 execute run more than two programs at the same time.
+  10.Angular1 is controllers and $scope based but Angular2 is component based.
+  11.The Angular2 structural directives syntax is changed like ng-repeat is replaced with *ngFor etc.
+  12.In Angular2, local variables are defined using prefix (#) hash. You can see the below *ngFor loop Example.
+  13.TypeScript can be used for developing Angular 2 applications
+  14.Better syntax and application structure  
+
+What is AOT Compilation? - Pros and Cons of Ahead-of-Time
+  AOT compilation stands for “Ahead of Time compilation”
+  it are used to compiles the angular components and templates to native JavaScript and HTML during the build time instead of run-time.
+  The compiled HTML and JavaScript are deployed to the web server so that the compilation and render time can be saved by the browser.
+  It is the big advantage to improve the performance of applications.
+  Advantages
+    1.Faster Download:The Angular 2 app is already compiled so it is faster.
+    2.Faster Rendering
+        If the app is not AOT compiled and the compilation process happens in the browser once the application is fully loaded
+        This has a wait time for all necessary components to be downloaded and then the time taken by the compiler to compile the app
+        With AOT compilation, this is optimized.
+    3.Lesser Http Requests
+        It is supporting to the lazy loading.
+        Actually, lazy loading is great concepts for sending HTTP request to the server. 
+        It is minimise the multiple requests for each associated html and css, there is a separate request goes to the server.
+    4.Detect error at build time
+    5.Better security
+  Disadvantages
+    1.AOT only works only with HTML and CSS and not for other file types
+    2.If required other file types that time we will need to follow the previous build step.
+    3.We need to maintain AOT version of bootstrap file.
+    4.We need to clean-up step before compiling.
+    ng build --aot
+    ng serve --aot
+
+What is Lazy Loading and How to enable Lazy Loading?
+   Lazy loading enables us to load only the module user is interacting and keep the rest to be loaded at run-time on demand
+   Lazy loading speeds up the application initial load time by splitting the code into multiple bundles and loading them on demand.
+   ex:
+     ng new lazydemo 
+     ng g m lazy --flat
+     ng g c lazy-parent --module lazy
+     ng g c lazy-child --module lazy
+How would you Optimize the Angular 2 Application for Better Performance?
+  1.Consider AOT compilation.
+  2.Consider lazy loading instead of fully bundled app if the app size is more.
+  3.Keep in mind, your application is bundled and disfeatured.
+  4.Keep in mind, your application doesn’t have un-necessary import statements.
+  5.Keep in mind, your application’s 3rd party unused library. If exist and not used, removed from your application.
+  6.Remove your application dependencies if not required.
+
+Constructor Vs. ngOnInit
+  1.The constructor is a default method runs when component is being constructed.
+  2.The constructor is a typescript feature and it is used only for a class instantiations and nothing to do with Angular 2.
+  3.The constructor called first time before the ngOnInit().
+  4.The ngOnInit event is an Angular 2 life-cycle event method that is called after the first ngOnChanges 
+  5.The ngOnChanges is called when an input or output binding value changes.
+  
+  
+    
+    
+    
+    
+    
