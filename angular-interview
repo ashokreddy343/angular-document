@@ -68,9 +68,91 @@ Constructor Vs. ngOnInit
   3.The constructor called first time before the ngOnInit().
   4.The ngOnInit event is an Angular 2 life-cycle event method that is called after the first ngOnChanges 
   5.The ngOnChanges is called when an input or output binding value changes.
+    import { Component, OnInit } from '@angular/core';
+    export class HomeComponent implements OnInit {
+      constructor() {
+      console.log("constrcutor log");
+      }
+      ngOnInit() {
+      console.log("ngOninit")
+      }
+    }  
+  ngOnInit is purely there to give us a signal that Angular has finished initialising the component 
+
+Angular 2  Component Lifecycle Hooks
+  constructor
+      This is invoked when Angular creates a component or directive by calling new on the class.
+  ngOnChanges
+      Invoked every time there is a change in one of th input properties of the component.
+  ngOnInit
+      Invoked when given component has been initialized.
+      This hook is only called once after the first ngOnChanges
+  ngDoCheck
+      
+    ngAfterContentInit
+    ngAfterContentChecked
+    ngAfterViewInit
+    ngAfterViewChecked
+  ngOnDestroy
+
+What is the Best way to Declare and Access a Global Variable in Angular 2?
+  1.Create Global varibles
+  2. Import and Use the Global Variables in the Component.
+  import { Injectable } from '@angular/core';
+  @Injectable()
+  export class AppGlobals {
+    readonly baseAppUrl: string = 'http://localhost:57431/';
+    readonly baseAPIUrl: string = 'https://api.github.com/';
+    }
+
+Components
+  what is a component?
+    In Angular 2, the components are the main way to build or specify HTML elements and business logic on the page
+    Application->Component->Component1 and Component2
+    Angular 2 Component meta-data annotation is used to register the components.
+    Angular 2 components are used to create UI widgets.
+    Angular 2 components are used to split to application into smaller parts.
+    Only one component is used per DOM element.
+    In the Angular 2 components, @View, template and templateUrl are mandatory in the components.
+Angular 2 components vs directives
+    @Components
+        1.@Component meta-data annotation is used  to register the components.
+        2.The components are used to create UI widgets
+        3.The components are used to split to application into smaller parts.
+        4.Only one component is used per DOM element.
+        5.In the components, @View, template and templateUrl are mandatory in the components.
+     @Directive
+        1.@Directive meta-data annotation is used  to register the directives.
+        2.The directives are used to add behavior to existing DOM elements.
+        3.The directives are use to design a reusable components
+        4.More than one directive are used per DOM element
+        5.The directive do not have @View etc.
   
+Angular 2 @Inputs - How to Passing data into Angular 2 components with @Input?
+   @Input allows you to pass data into your controller and templates through html and defining custom properties.
+  //app.component.ts
+    <app-tutorails [parentData]=name></app-tutorails>
+    tutorials.component.ts
+    export class TutorailsComponent implements OnInit {
+     @Input() parentData:string;  
+     }
+Angular 2 Component Outputs [@Output Property]
+  @Output decorator is used to binds a property of a component to send the data from child component to parent 
+   component and this is a one-way communication
+  @Output decorates output properties and its binds a property of the type of angular EventEmitter.
   
-    
+Angular 2 Hidden Attribute
+  Angular 2 [hidden] is a special case binding to hidden property
+  It is closest cousin of ng-show and ng-hide.
+How do Components Communicate with Each Other in Angular 2?
+ 1.service
+ 2.@Input
+ 3.@Output
+
+What are the difference between Renderer and ElementRef in angular 2?
+  In Angular Renderer and ElementRef are used for DOM Manipulation and Renderer and 
+  ElementRef are used together to get full platform abstraction
+  
     
     
     
