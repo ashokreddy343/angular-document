@@ -152,7 +152,153 @@ How do Components Communicate with Each Other in Angular 2?
 What are the difference between Renderer and ElementRef in angular 2?
   In Angular Renderer and ElementRef are used for DOM Manipulation and Renderer and 
   ElementRef are used together to get full platform abstraction
-  
+service questions
+----------------
+What is an Angular 2 Service?
+  Angular 2 service is a class that encapsulates some methods (GET/POST/PUT) and provides 
+        it result as a service for across your application.
+What are the features of Angular 2 Service?
+  1.Services are singleton objects.
+  2.Services are capable of returning the data in the form promises or observables.
+  3.Service class is decorated with Injectable decorator.
+  4.The Injectable decorator is required only if our service class is making use of some Angular injectable like Http, 
+      Response and HttpModule service within it.
+
+What are the differences between Observables & Promises?
+  1.Promise : Promises are only called once and It can return only a single value at a time and the Promises are not cancellable.
+  2.Observables : Observables handle multiple values over time and it can return multiple values and the Observables are cancellable.
+  3.The Observables are more advanced than Promises.
+Steps for creating an Angular 2 Service:-
+  1.Import the injectable member i.e
+    import {Injectable} from '@angular/core';
+  2.Import the HttpModule, Http and Response members’
+    import { HttpModule, Http, Response } from '@angular/http';
+  3.Add the @Injectable Decorator i.e. @Injectable()
+  4.Export to the Service class
+    export class UserService {
+    constructor(private _http: Http) {  }
+    }
+Pipe questions
+  What is Pipes?
+    Pipes transform displayed values within a template.
+    Sometimes, the data is not displays in the well format on the template that time where using pipes.
+    You also can execute a function in the template to get its returned value.
+    Pipe class implements the “PipeTransform” interfaces transform method that accepts an input value and returns the transformed result
+    The “@Pipe” decorator allows us to define the pipe name that is globally available for use in any template in the across application
+        
+        import { Pipe, PipeTransform } from '@angular/core';
+        @Pipe({
+          name: 'barcode',
+          pure: false
+        })
+        export class BarCodePipe implements PipeTransform {
+         transform(value: string, args: any[]): string {
+           if (!value) {
+            return '';
+          }
+          return "****-****_" + (value.length > 8 ? (value.length - 8): '')
+        }
+    }
+
+Angular 2 Built-in Pipes:-
+  1.Date
+  2.UpperCase
+  3.LowerCase
+  4.Currency
+  5.Percent
+  6.Json
+  7.Async
+Why use Pipes?
+  Sometimes, the data is not displays in the correct format on the template that time where using pipes.
+
+What is a pure and impure pipe?
+  The pure pipe is by default
+   Every pipe has been pure by default.
+   If you want to make a pipe impure that time you will allow the setting pure flag to false.
+   Pure Pipes
+    Angular executes a pure pipe only when it detects a pure change to the input value. A pure change can be primitive or non-primitive
+     Primitive-single non-primitive - group of values
+   Impure pipes
+      Angular executes an impure pipe during every component change detection cycle.
+      An impure pipe is called often, as often as every keystroke or mouse-move
+      If you want to make a pipe impure that time you will allow the setting pure flag to false.
+ What is async pipe ?
+  Angular 2 provides us special kinds of pipe that is called Async pipe.
+  Async pipe subscribes to an Observable or Promise and returns the latest value it has emitted.
+  The Async pipe allows us to bind our templates directly to values that arrive asynchronously manner 
+    and this is the great ability for the promises and observables
+How to create a custom Pipes?
+How to create a globally available custom “Pipe”?
+  The “@Pipe” decorator allows us to define the pipe name that is globally available for use in any template in the across application
+
+Directive questions
+    there are three types of directives
+      1.component directives : directives with a template
+      2.structural directives : change the DOM layout by adding and removing DOM elements. 
+      3.Attribute Directives :change the appearance or behavior of an element, component, or other directive
+Angular 2 Router Outlet Directives
+  Router-outlet directive is used to render the components for specific location of your applications.
+  Both the template and templateUrl render the components where you use this directive.
+  <router-outlet> </router-outlet>
+  Router-link directive:- Router-link directive is used to link a specific part of your applications.
+        <a [router-link]="['/AboutMe']">About Me</a>
+
+Template Questions
+  A template is a HTML view that tells Angular 2 for render your components in the views
+
+Styling questions
+ The Angular 2 “styles” or “styleUrls” should only be used for css rules and it is affect the style of the template elements
+ This is the best approaches to add styles directly to the components and the view encapsulation is set per component. It is use for some situations
+   @Component({
+      selector: 'home',
+      templateUrl: './home.component.html',
+      styleUrls: ['./home.component.css'],
+      styles: ['.tbl-row-border { border: 1px solid red;}','.txt-color{color:red;}']
+  })
+
+Routing Questions
+ The Router is use to map applications URLs to application components.
+ There are three main components that you are using to configure routing
+    1.Routes: It uses to describe our application's Routes.
+    2.Router Imports : It uses to import our application's Routes
+    3.RouterOutlet: - It is a placeholder component and use to get expanded to each route's content
+    4.RouterLink: - It is use to link to application's routes.
+    The “RouterModule.forRoot” method in the module imports to configure the router.
+    Router-outlet directive: - Router-outlet directive is used to render the components for specific location of your applications.
+    Both the template and templateUrl render the components where you use this directive.
+    <router-outlet></router-outlet>
+  Is it possible to have a multiple router-outlet in the same template?
+      Yes! We can use multiple router-outlets in same template by configuring our routers and simply add the router-outlet name. 
+      You can see in the example.
+      <div class="row">
+        <div class="user">
+          <router-outlet name="userList"></router-outlet>
+        </div>
+      <div class="userInfo">
+          <router-outlet name="userInfo"></router-outlet>
+      </div>
+    </div>
+    
+const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'user', component: userComponent, children: [
+     { path: 'userList', component: userListComponent, outlet: 'userList' },
+     { path: ':id', component: userInfoComponent, outlet: 'userInfo' }]
+  }];
+What is Router-link directive in Angular 2?
+    Router-link directive: - Router-link directive is used to link a specific part of your applications.
+         <a [routerLink]="['/login']">
+            <span class='glyphicon glyphicon-Login'></span> Login
+        </a>
+
+
+
+
+
+ 
+   
+
     
     
     
