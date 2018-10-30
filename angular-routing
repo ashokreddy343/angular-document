@@ -1,0 +1,95 @@
+primary routes
+child routes
+secondary routes
+Angular Modules
+  Imports
+  Exports
+  Declartions
+  Providers
+  Bootstrap
+How routing works
+  <a [routerLink]="['/products']">Product Lists</a>
+ url is changed->match path->Process redirect
+ url is changed->match path->process guards->resolve data->Activate components->Display templates
+ 
+Routing Basics
+  Defining the Base Path
+    index.html
+    <base href="/"> : For Development
+    <base href="/APM/">  For Deployment
+    Reseting the base path
+      Manually reset the path
+      Use a task runner
+      Use the Angular CLI
+        ng build --base-href /APM/
+    
+ Importing the Angular Router
+    RouterModule
+        service
+        Configuration
+        Directives
+          -RouterLink
+          -RouterLinkActive
+          -RouterOutlet
+  import {RouterModule} from '@angular/core'
+  RouterModule.forRoot()
+   Declares the router directives
+   Manages our route configuration
+   Register the Routerservice
+   Used once for the application
+  RouterModule.forChild()
+    Declares the router directives
+    Manages our route configuration
+    Does Not register the router service
+    used in feature modules
+
+Configuring Application Routes
+  RouterModule.forRoot([
+      {path:'welcome',component:WelcomeComponent},
+      {path:'',redirectTo:'welcome',pathMatch:'full'},
+      {path:'**',component:PageNotFoundComponent}
+    ]),
+
+Placing the template
+    <router-outlet></router-outlet>
+
+Activating Routes
+  Navigating the application routes
+    routerLink is a attribute directive
+    linkparameters array
+
+Using HTML5  or Hash
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 
