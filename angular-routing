@@ -192,9 +192,61 @@ Component Class
       {
         queryParams:{filterBy:'er',showImage:true}
       }
-      
-      
-      
+Retaining query parameter
+  Template
+    <a [routerLink]="['/products']" queryParamsHandling="preserve">Back</a>
+  Component Class
+    this.route.navigate(['/products'],{queryParamsHandling:'preserve'}
+    agular v4 +
+    [preserveQueryParams]="true"
+Reading query parameters
+  import {ActivatedRoute} from '@angular/router'
+  constructor(private route:ActivatedRoute)
+  {
+   this.route.snapshot.queryParams['filterBy']
+   this.route.snapshot.queryParams['showImage']
+  }
+
+Prefetching Data using Route Resolvers
+Benefits of Prefetching Data
+ Prevents display of a partial page
+ Reuses code
+ Improves flow when an error occurs
+Providing data with a route
+  Amount of data
+  scope of data sharing
+  how data is used
+  Route Parameters
+  Optional Parameters
+  Query Parameters
+  Routes Data Property
+  RouteResolver
+  Angular Service
+Route's Data Property
+  Angular Module
+    RouterModule.forChild([
+      { path: "products", component: ProductListComponent,data:{pageTitle:'Product List' },
+      { path: "products/:id", component: ProductDetailComponent },
+      { path: "products/:id/edit", component: ProductEditComponent }
+    ])
+  Component Class
+    this.pageTitle=this.route.snapshot.data['pageTitle']
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       
       
       
