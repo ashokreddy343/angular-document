@@ -59,7 +59,151 @@ Activating Routes
     linkparameters array
 
 Using HTML5  or Hash
+  HTML5 style
+    Leverges HTML5 history pushState
+    Default
+    More natural Url
+    Requires Url Rewriting
+ Hash-Based 
+    Leverges Url Fragments
+    Must be set with{useHash:tru}
+    Does not require Url rewriting
+Basic checklist:setting up routing
+  Define the base path
+    <base href="/"> //index.html
+  Import router module
+    use RouterModule.forRoot() for app
+  Configuring Routes
+   path:
+      -No leading slash
+      -'' for default route, '**' for wildcard route
+      -casing matters
+     component
+      Not string name:not enclosed in quotes
+      component must be imported
+      order is important
+     Placing the template
+      Add the RouterOutlet Directive
+       -Identifies where to display the routed components tempalte
+       <router-outlet></router-outlet>
+      Activating the route
+        <a [routerLink]="['/welcome']">Home</a>
+Routing to features
+Setting up for Feature Routing
+  RouterModule Router service and configurations and Directives activating the routes
+Route path naming strategies
+  productlist :products
+  ProductDetails :products/:id
+  ProductEdit :products/:id/edit
 
+Activating route with code
+  import {Router} from '@angular/router'
+  @Component({})
+  export class AppComponent{
+    constructor(private router:Router){}
+    logOut():void{
+      this.router.navigate(['/welcome']);
+    }
+  }
+  this.router.navigate(['/welcome']); //standard syntax
+  this.router.navigate('/welcome');   //short-cut syntax
+  this.router.naviageByUrl('/welcome'); //complete Url path
+  
+  Routepaths
+    Products
+    login
+    welcome
+    ''
+    ***
+why define a routing module?
+ Better Organization
+ Easier to find
+ spearation of concerns
+
+Feature Module checklist
+  configuration
+    Import router module
+      -Be sure to use RouterModule.forChild()
+      -Configure the routes
+      -order matter
+
+Route Parameters
+
+Configuring Routes with Placeholders
+  [
+   {path:'orders',component:OrderListComponent},
+   {path:'orders/:id',component:OrderDetailComponent},
+   {path:'orders/:id/items/:itemId',component:OrderItemDetailsComponent}
+  ]
+
+Populating Route Parameters
+  Template
+    <a [routerLink]="['/products',proudct.id]">{{product.ProductName}}</a>
+    <a [routerLink]="['/products',proudct.id,'edit']">Edit</a>
+    <a [routerLink]="['/products',0,'edit']">Add Product</a>
+   
+   Component Class
+    this.router.navigate(['/products',this.product.id]);
+Reading Route Parameters
+  ActivatedRouteService
+   UrlSegments
+   RouteParameters
+   QueryParameters
+   Resolverdata
+   constructor(private route:ActivatedRoute){}
+   let id=this.route.snapshot.params['id']
+   
+   Observable
+    this.route.params.subscribe(
+      params=>{let id=params['id']}
+    )
+Reading Route Parameters:Observable
+    this.route.params.subscribe(
+      params=>{let id=params['id']}
+    )
+   snapshot
+      To read the parameters only once
+      simple code  
+   observable
+     To watch parameter changes
+     complex logic
+Reading Route Parameters (v4+)
+  let id=this.route.snapshot.paramMap.get('id')
+  this.route.paramMap.subscribe(
+      params=>{let id=params.get('id')}
+    )
+Defining optional route parameters
+  Template
+    [routerLink]="['/products',{name:productName,code:productCode,startData:date,endData:data}]
+Reading optional Route Parameters
+  import {ActivatedRoute} from '@angular/router'
+  constructor(private route:ActivatedRoute)
+  {
+   this.route.snapshot.params['name']
+   this.route.snapshot.params['code']
+  }
+
+Definig Query Parameters
+Template
+  <a [routerLink]="['/products',product.id]
+     [queryParams]="{filterBy:'er',showImage:true}"></a>
+Component Class
+  this.router.navigate(['/products'],
+      {
+        queryParams:{filterBy:'er',showImage:true}
+      }
+      
+      
+      
+      
+      
+      
+      
+   
+
+    
+  
+      
     
     
     
