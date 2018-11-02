@@ -1,0 +1,110 @@
+what is a component in angular 2 ?
+  A component in Angular is a class with a template and a decorator.
+    Template:
+            Defines the user interface
+            Contains the HTML, directives and bindings.
+    Class:
+          Contains the code required for template.
+          We use TypeScript to create the class.
+          Containes properties and methods
+    Decorator:
+            We use the Component decorator provided by Angular to add metadata to the class.
+            A class becomes an Angular component, when it is decorated with the Component decorator.
+Angular template vs templateurl
+      Angular2 recommends to extract templates into a separate file, if the view template is longer than 3 lines use templateUrl
+Angular interpolation
+      Interpolation is all about data binding.
+      In Angular data-binding can be broadly classified into 3 categories
+        1.One way data binding :  From Component to View Template
+        2.One way data binding :  From Template to View Component
+        3.Two way data binding :  Both views
+     {{firstName}} //string interpolation
+     
+Property binding in Angular 2
+    Both Interpolation and Property binding flows a value in one direction
+    e from a component's data property into a target element property.
+What is the difference between Interpolation and Property binding
+    Interpolation is a special syntax that Angular converts into a property binding
+    Interpolation is just a convenient alternative to property binding. 
+    In some cases like when we need to concatenate strings we have to use interpolation instead of property binding as shown in the example below.
+    <img src='http://www.pragimtech.com/{{imagePath}}' />
+    When setting an element property to a non-string data value, you must use property binding
+    We can also use the alternate syntax with bind- prefix. This is known as canonical form
+    <button bind-disabled='isDisabled'>Click me</button>
+    but the important point to keep in mind is both the techniques protect us from malicious content and render the content harmlessly.
+    
+html attribute vs dom property
+    what is a DOM ?
+        DOM stands for Document Object Model.
+        When a browser loads a web page, the browser creates a Document Object Model of that page. 
+         Angular data-binding is all about binding to DOM object properties and not HTML element attributes.
+    What is the difference between HTML element attribute and DOM property
+        Attributes are defined by HTML, where as properties are defined by the DOM.
+        Attributes initialize DOM properties. Once the initialization complete, the attributes job is done.
+        Property values can change, where as attribute values can't.
+    So it is important to keep in mind that, 
+        HTML attributes and the DOM properties are different things.
+        Angular binding works with properties and events, and not attributes.
+        The role of attributes is to initialize element properties and their job is done.
+
+Angular attribute binding
+    colspan and aria attributes does not have corresponding DOM properties.
+    So in this case we want to be able to bind to HTML element attributes. 
+    To make  this happen, Angular provides attribute binding. 
+    With attribute binding we can set the value of an attribute directly. 
+    Angular team recommends to use Property binding when possible and use attribute binding only when there is no corresponding element property to bind. 
+    <th [attr.colspan]="columnSpan">
+    The same is true when using interpolation
+    <th attr.colspan="{{columnSpan}}">
+    
+Class binding in angular 2    
+  ngClass is used to bind multiple classes
+
+Style binding
+    To set multiple inline styles use NgStyle directive as shown below
+Angular2 event binding
+    <button on-click="onClick()">Click me</button>
+    onClick(): void {
+        console.log('Button Clicked');
+    }
+Two way data binding in angular 2
+   1. Open app.module.ts file
+   2. Include the following import statement in it
+       import { FormsModule } from '@angular/forms';
+   3. Also, include FormsModule in the 'imports' array of @NgModule
+        imports: [BrowserModule, FormsModule]
+   4.<input [(ngModel)]='name'>
+
+Angular ngFor directive
+Angular ngFor trackBy
+  ngFor directive may perform poorly with large lists
+  A small change to the list like, adding a new item or removing an existing item may trigger a cascade of DOM manipulations
+    
+Angular pipes
+      Transform data before display
+      Built in pipes include lowercase, uppercase, decimal, date, percent, currency 
+Angular custom pipe
+    import { Pipe, PipeTransform } from '@angular/core';
+    @Pipe({
+    name: 'employeeTitle'
+    })
+    export class EmployeeTitlePipe implements PipeTransform {
+      transform(value: string, gender: string): string {
+        if (gender.toLowerCase() == "male")
+            return "Mr." + value;
+        else
+            return "Miss." + value;
+      }
+    }
+
+Angular 2 container and nested components
+    
+        
+        
+        
+        
+        
+        
+        
+        
+            
