@@ -1,0 +1,51 @@
+npm i -g @angular/cli@latest
+ng new Angular6Project --skip-tests
+Prior to Angular 6, the Angular CLI configuration file is called angular-cli.json
+In Angular 6, it is renamed to just angular.json. It's not a simple rename, the file format is also slightly different
+The src folder contains the angular application components, templates, services, styles, images, and anything else the application needs.
+The files outside of this folder are meant to support building, testing, maintaining, documenting, and deploying the angular application. 
+To confirm this Angular application is using Angular Version 6, open package.json file and notice all the Angular packages version is 6.1.0. 
+npm i bootstrap@3 jquery --save
+ng s --port 1237 -o
+ng g c employee/create-employee --spec=false --flat=true
+
+ When you create a new Angular 6 project, this is included automatically by the Angular CLI. 
+ 
+ ng g m app-routing --flat=true --module=app
+ 
+ Two ways to create forms in angular
+  Template driven forms
+  Reactive forms (model driven forms)
+ 
+ Classes for creating a form cotrol tree
+  FormGroup
+  FormControl
+formGroup directive :Binds <form> elements FormGroup isntance
+formControlName directive : Binds input element to FormControl instance
+to work with reactive forms module we will import
+import {ReactiveFormsModule} from '@angular/forms';
+import {FormGroup,FormControl} from '@angular/forms';
+
+Angular form control and form group
+    in a reactive form we create instance of FormControl and FormGroup classes
+    Both FormControl and FormGroup classes inherit from AbstractControl base class
+    The AbstractControl class has properties that help us track both FormControl and FormGroup value and state
+    AbstractControl 
+      Properties
+          value
+          errors
+          valid
+          invalid
+          dirty
+          pristine
+          touched
+          untouched
+  FormControl tracks the value and state of an individual html element
+  FormGroup instance tracks the value and state of all the form controls in theat group
+  To Access a FormGroup and FormControl
+    employeeForm.controls.fullName.value
+    OR
+    employeeForm.get('fullName').value
+  Angular nested form groups
+  
+    
