@@ -98,9 +98,35 @@ Angular custom pipe
     }
 
 Angular 2 container and nested components
-    
+Angular component lifecycle hooks
+    1.ngOnChanges
+        Executes, every time the value of an input property changes.
+        The hook method receives a SimpleChanges object containing current and previous property values. 
+        This is called before ngOnInit
+    2.ngOnInit
+        Executes after the constructor and after ngOnChange hook for the first time.
+        It is most commonly used for component initialisation and retrieving data from a database
         
+    3.ngDoCheck
+        a.ngAfterContentInit
+        b.ngAfterContentChecked
+        c.ngAfterViewInit
+        d.ngAfterViewChecked
+     4.ngDestroy
+          Executes just before angular destroys the component and generally used for performing cleanup
         
+Angular services tutorial
+      Why do we need a service in Angular
+          A service in Angular is generally used when you need to reuse data or logic across multiple components
+         The logic or data access is implemented once in a service, and the service can be used across all the components in our application. 
+Difference between constructor and ngOnIni    
+     A class constructor is automatically called when an instance of the class is created.
+     It is generally used to initialise the fields of the class and it's sub classes. 
+     ngOnInit is a life cycle hook method provided by Angular.
+     ngOnInit is called after the constructor and is generally used to perform tasks related to Angular bindings.
+     ngOnInit is the right place to call a service method to fetch data from a remote server
+     As fetching data from a remote server is time consuming, the better place for calling the service method is ngOnInit.
+
         
         
         
