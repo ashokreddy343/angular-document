@@ -60,6 +60,8 @@ Angular 5 Bug Fixes - Angular 5
 8.     Forbid destroyed views to be inserted or moved in VC
 9.     Support persisting dynamic styles within animation states
 
+ng new AngularCrud --skip-tests true
+ng new employees/listEmployees --spec false --flat true
 
 
 
