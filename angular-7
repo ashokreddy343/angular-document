@@ -25,3 +25,13 @@ Bug fixes on the core
   1.Added a new compiler dependency
   2.Added a new compiler to integration
   
+Angular -The Complete Guide -22 hours
+====================================
+What is Angular?
+  Angualr is a JAvascript Framework which allows you to create reactive SPAs.
+Updating CLI
+  npm uninstall -g angular-cli @angular/cli
+  npm cache clean
+  npm i -g @angular/cli
+  ng new my-first-app 
+  
