@@ -1,0 +1,8 @@
+ng new angualr-material-hello-world --routing
+npm install @angular/material @angular/cdk
+npm isntall @angular/animations
+npm install hamerjs
+hamerjs is used for mobile friendly
+
+import file in styles.css
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
