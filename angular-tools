@@ -1,2 +1,20 @@
 1.angular-cli
 2.https://angularconsole.com/ (ui angular cli)
+
+compodoc
+	npm i --save @compodoc/compodoc
+
+compodoc -p src/tsconfig.json -s -w
+	As you understand,Compodoc is a documentation tool for Angualr applications
+what are the key features compodoc
+	-full Angular API support
+	-display each API by type:module,component,directive,service,class,pipe
+	-and also application routing
+	-application documentaion coverage support
+	-other Typescript files like interfaces or simple enums,types or varibles
+	-Additional documentation
+
+Advantages
+	-offline tool using Node.js
+	-no source code upload online for metadata scanning
+	-no local Type
