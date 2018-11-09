@@ -1,0 +1,30 @@
+what is Angular service ?
+	Reusable piece of functionality shared across components.
+	Responsible for a single,discrete piece of functionality.
+	Able to be delivered when and where it is needed.
+Parts of a Service
+	Class
+	@Injectable Decorator
+	Provider
+	
+ ex:
+ @Injectable()
+ export class DataService
+ {
+  getAllReaders()
+ }
+
+Delivering Services to Components
+export class DashBoardComponent
+{
+	cosntructor(private dataService:DataService)
+}
+
+Sharing Data with Services
+
+Understanding and Configuring DI
+	Loosely coupled code
+	More flexible code
+	Easier to test
+Providers
+Injectors
