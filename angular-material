@@ -6,3 +6,47 @@ hamerjs is used for mobile friendly
 
 import file in styles.css
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
+What is Angular Material ?
+	Reference implementation of Google's Material Design Specification.
+References and Links
+	https://material.io/guidelines/
+	https://material.angular.io/
+	https://github.com/angular/material2
+	https://github.com/ajtowf/angularmaterial
+Material Design
+	Why beautiy important ?
+		Attractive things work better
+	Material is the metaphor
+	Bold,graphic and intentional
+	Motion provides meaning
+Setting up Enviornment
+	nodejs,npm,typescript
+	visual studio code
+	npm i -g @angular/cli	
+installing Angular material
+	install angular material and angular cdk
+	angular cdk(angular component development kit)
+	npm i --save @angular/material @angular/cdk
+	npm i --save @angular/animations
+	import BrowserAnimationModule
+	import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+	import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+ng g m material --dry-run
+ng g m shared/material --flat
+Include a theme
+npm i --save hammerjs (for gestures support)
+import hammer js in main.ts file
+Add material icons index.html page
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+Layout Components
+Flex Layout Box Model and Terminology
+ng g m demo/demo
+ng g m demo/demo --flat --routing
+
+ng g c demo/buttons --no-spec --inline-style --inline-template
+npm i -save @angular/flex-layout
+ng g m contactmanager --no-spec
+ng g c contactmanager/contactmanager-app --dry-run		
+
