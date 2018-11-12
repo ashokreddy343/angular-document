@@ -126,7 +126,24 @@ Difference between constructor and ngOnIni
      ngOnInit is called after the constructor and is generally used to perform tasks related to Angular bindings.
      ngOnInit is the right place to call a service method to fetch data from a remote server
      As fetching data from a remote server is time consuming, the better place for calling the service method is ngOnInit.
-
+Angular 2 routing tutorial
+	import { RouterModule, Routes } from '@angular/router';
+	Routes is an array of Route objects
+	Each route maps a URL path to a component
+	const appRoutes: Routes = [
+        { path: 'home', component: HomeComponent },
+        { path: 'employees', component: EmployeeListComponent },
+        { path: '', redirectTo: '/home', pathMatch: 'full' },
+        { path: '**', component: PageNotFoundComponent }
+       ];
+	RouterModule.forRoot(appRoutes)
+	The order of the eoutes is very important	
+	When matching routes, Angular router uses first-match wins strategy.
+	The routerLink, routerLinkActive and router-outlet directives are provided by the 
+	RouterModule which we have imported in our application root module
+	If you forget to specify the router-outlet directive, you will get and error 
+	 stating - cannot find primary outlet to load component
+	RouterModule.forRoot(appRoutes, { useHash: true })
         
         
         
