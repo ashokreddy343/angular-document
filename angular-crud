@@ -1,0 +1,149 @@
+Angular 6
+	npm i -g @angular/cli@latest
+	ng -v
+	ng serve
+Angular Architecture
+	Main.ts file is a entry point
+	bootstraping means to initilazing application
+	polyfills
+		it handles browser supporting functionality 
+Angular Decorators
+	Types of Decorators
+		Class Decorators
+		Member Decorators
+	we can apply multiple decorators as well
+Lifecycle Hooks
+	OnChanges
+	OnInit
+	DoCheck
+	AfteContentInit
+	AfterContentChecked
+	AfterViewInit
+	AfterViewChecked
+	OnDestroy
+
+ActivatedRoute
+	it is an interface
+	import {ActivatedRoute} from @angular/router;
+	constructor(private route:ActivatedRoute)
+	{
+	this.route.params.subscribe(params=>console.log(params['id']))
+	}			
+	this.name=this.route.snapshot.params.name
+ActivatedRouteSnapshot
+Log the router navigation events to the browser console
+RouterModule.forRoot(appRoutes,{enableTracing:true})
+
+Angular crud tuorial
+Reading data in angular
+Angular Routing and Navigation
+	import {RouterModule,Routes} from '@angular/router'				
+	<a routerLink="list">List</a>
+<router-outlet></router-outlet>
+
+Angular base href
+	During development we usually set this to a single forward slash as shown below. 
+	<base href="/">
+Angular forms 
+There are 2 ways to create forms in Angular
+1.Template Driven Forms
+2.Model Driven Forms(Commonly called Reactive Forms)
+
+Template Driven Froms
+	Template Driven forms are generally used to create simple forms.
+	we do most of teh work in the view template of component
+	<form #employeeForm="ngForm" (ngSubmit)="saveEmployee(employeeForm)">
+	#employeeForm is called the template reference variable.
+ngSubmit directive
+	The ngSubmit directive submits the form when we hit the enter key or when we click the Submit button. 
+ngForm directive
+	the ngForm directive is provided by Angular FormsModule
+	<div class="form-group">
+	  <label for="fullName">Full Name</label>
+	  <input id="fullName" type="text" class="form-control"
+          name="fullName" [(ngModel)]="fullName">
+	 </div>	
+Reactive Forms
+	Reactive forms are used to create complex forms
+			
+Bootstrap radio buttons in Angular
+Angular radio button checked by default
+	<input type="radio" name="gender" value="male" [(ngModel)]="gender" checked>
+	<input type="checkbox" name="isActive" [(ngModel)]="isActive" checked>Is Active		
+Angular disable browser validation
+	By default Angular 4 and later versions disable browser native validation	
+	<form #employeeForm="ngForm" ngNativeValidate
+	      (ngSubmit)="saveEmployee(employeeForm)">
+Angular form validation
+	To uderstand validation in Angular,we need to understand the 	
+	following 3 sets of properties in Angular
+	touched,untouched
+	pristine,dirty
+	valid,invalid
+	pristine::form contol value had not been changed
+	dirty:the value has been changed
+	If all the form fields are valid, then the form is valid. If any of the form field is invalid the form is also invalid.
+Model binding in angular template driven forms
+Angular email validation example
+Angular service
+	A service in angular is a class
+	Irrespective of whether a service has an injected dependency or not, always decorate the angular service class with @Injectable() decorator for consistency and future proof
+	If a service is registered at a component level, then that service is available only to that component and to it's children			
+	If a service is registered at a module level, then that service is available to all the components in the application
+	To use a service in a component inject it into the component class constructor
+ngOnChanges
+	we get all the changes instead of just the changes related to a single property
+	Useful when multiple properties changes
+Property setter
+	Property setter is specific to a given property, so we only get changes of that specific property
+	Useful when you want to keep track of a single property
+
+Angualr component communication
+	To pass data from parent component to child component we use input properties
+	In the child component we create a property with @Input decorator. 
+	The parent component then binds to the child component's input property
+Component Output Property
+	On the other hand, to pass data from child component to parent component we use output properties
+	The child component raises an event to pass data to the parent component.
+	To create and raise an event, we use EventEmitter object.
+	So the output property is an event defined using EventEmitter object and decorated with @Output decorator
+	To specify the type of data that we want to pass from the child component to parent component we use the EventEmitter generic argument
+	@Output() notify: EventEmitter<string> = new EventEmitter<string>();
+	@Output() notify: EventEmitter<number> = new EventEmitter<number>(); 
+	@Output() notify: EventEmitter<any> = new EventEmitter<any>();
+	@Output() notify: EventEmitter<Employee> = new EventEmitter<Employee>();
+Call child component methods and properties using template reference variable
+
+Angular route guards
+	CanDeactivate : Guard navigation away from the current route
+	CanActivate   : Guard navigation to a route
+	CanActivateChild : Guard navigation to a child route
+	CanLoad:Guard navigation to a feature module loaded asynchronously
+	Resolve:Perform route data retrieveal before route activation
+	Three steps to use a Route Guard
+		Build the route guard
+		Register the guard with angualr dependecy injection system
+		Tie the guard to a route
+CanDeactivate limitations : 
+	CanDeactivate guard does not prevent route deactivation 
+	If you type a different url in the address bar directly OR
+	If you close the tab or the browser window OR
+	If you navigate to an external URL
+Angular Route Params
+	Creating a route with parameter
+	{path:'employees/:id',component:EmployeeDetailsComponent}
+	Activating the route with patameters
+	onClick(employeeId:number){
+	  this._route.navigate(['/employee',employeeId]);
+	}
+
+We can either use the snapshot approach or observable approach
+Angular optional route parameters
+	Required route parameters are part of route configuration where as optional route parameters are not.
+	Required route parameters are used in pattern matching i.e when mapping an incoming URL to a named route in our application
+	Optional route parameters are not used in pattern matching.
+	Optional route parameters must be passed after the required route parameters if any.
+@ViewChild() decorator is the form template reference variable. 
+
+Filter pipe in angular
+	Angular team recommends not to use pipes to filter and sort data.
