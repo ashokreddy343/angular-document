@@ -291,7 +291,26 @@ What is Router-link directive in Angular 2?
          <a [routerLink]="['/login']">
             <span class='glyphicon glyphicon-Login'></span> Login
         </a>
-
+Angular HTTP Interceptor
+	import {Injectable} from '@angular/core'
+	import {HttpInterceptor} from '@angular/common/http'
+	@Injectable()
+	export class TokenInterceptorService implements HttpInterceptor{
+	  intercept(req,next){
+		let tokenizreq=req.clone();
+	  }
+	}
+	To inject this service in app module like below
+	{
+	 provide:HTTP_INTERCEPTORS,
+	 useClass:TokenInterceptorService,
+	 multi:true //if we have multiple interceptors
+	}
+Promises and Observables
+Promises
+	Emits a single value
+Observables
+	Emits multiple values over a period of time
 
 
 
