@@ -1,0 +1,160 @@
+Angular NgRx:Getting Started
+What is NgRx?
+	Angular+redux pattern=NgRx
+Redux Pattern
+why NgRx
+	There is state everywhere
+		The store provides a place for UI state to retain it between router views
+	Getting data again and again
+		The store provides a client-side cache to use as needed
+	Notify everyone
+		The reducer updates the store and the store notifies all subscribers
+	Something isn't working
+		it has great tooling
+Don't use NgRx 
+	your team is new to angular
+		Ramp up with Angular and RxJs Observables first
+	The application is simple
+		the extra code required for NgRx may not be worth the effort
+	your team has a good pattern				
+		No need to change if you already have a good state management pattern in place
+The Redux Pattern
+	Redux is predicatble state container for javascript apps
+Redux priniciples
+	1.Single source of truth called store -Store
+	2.state is read only and only changed by dispatching actions-Actions
+	3.Changes are made using pure functions called reducers-Reducers
+Store
+	The store is the single source of truth
+	Do you have to put every piece of state in the store ?
+		No
+	What should not Go in the store?
+		Unshared state
+		Angualr form state
+		Non-Serializable state
+Actions
+	Dispatch an action to change state
+	Login action after a login form submission
+	Toggle side menu action after a button click
+	Retrieve data action when initializing a component
+	Start global spinner action when saving data
+	{
+	  type:'LOGIN'
+	  payload:{username:'ashok',password:'secret'
+	}		
+Reducer
+	Set a UserDetails property on login
+	Toggle sideMenuVisible property to true on button click 
+	Reducers are pure functions
+	function reducer(state,action)
+	  switch(action_type){
+	   case 'LOAD_USER':
+		return {users:[...state.users,action.payLoad]};
+	}
+	What is pure functions ?
+	 pure functions alwasy returns consitent values
+
+Advantages of Redux Pattern
+	Centralized immutable state
+	performance
+	Testability
+	Tooling
+	Component communication
+Redux is not great for making simple things quickly.it's great for making really hard things simple.
+
+View->user Event->Component->dipatch action->reducer->reducer send new state to store->store->send to component
+First Look at NgRx
+	npm install @ngrx/store
+	import {StoreModule} from '@ngrx/store'
+	StoreModule.forRoot(reducer)
+Produc Reducer
+Building a reducer to process actions
+	export function reducer(state,action){
+	 switch(action.type){
+	    case 'TOGGLE_PRODUCT_CODE':
+		return{
+		 ...state,
+		 showProductCode:action.payload
+		};
+	    default:
+		return state;
+	 }			
+	}
+Dispatching an action
+	constructor(private stre:Store<any>){
+	}
+	checkChanged(value:boolean):void{
+	 this.store.dispatch({
+	  type:'TOGGLE_PRODUCT_CODE',
+	  payload:value
+	 })
+	}	
+Subscribing to the store to get state changes
+	this.store.pipe(select('products'))
+	or
+	this.store.pipe(select('products')).subscribe(
+	products=>this.displayCode=products.showProductCode
+	);
+Checklist:store
+	Single container for application state
+	interact with that state in an immutable way
+	install the @ngrx/store package
+	Organize application state by feature 
+	Initialize the store using:
+	  StoreModule.forRoot(reducer)
+	  StoreModule.forFeature('feature',reducer)
+Checklist:Action
+	An action represents an event
+	Define an action for each event worth tracking
+	Action is an object with a type and optional payload
+		{
+		  type:'TOGGLE_PRODUCT_CODE',
+		  payload:value
+		}
+Checklist:Reducer
+	Responds to dispatched actions
+	Repalces the state tree with new actions
+	Build a reducer function(often one or more per feature)
+	Implement as  a switch with a case per action
+	   export function reducer(state,action){
+	 switch(action.type){
+	    case 'TOGGLE_PRODUCT_CODE':
+		return{
+		 ...state,
+		 showProductCode:action.payload
+		};
+	    default:
+		return state;
+	 }			
+	}
+	spread the state as needed
+Checklist:Dispatching an Action
+	Often done in response to a user action or an operation
+	Inject the store in the constructor
+	Call the dispatch method of the store
+	Pass in the action to dispatch
+	 this.store.dispatch({
+	  type:'TOGGLE_PRODUCT_CODE',
+	  payload:value
+	 })
+	pased to all reducers
+Checklist :Subscring to the store
+	Often done in the ngOnInit lifecycle hook
+	Inject the store in the constructor
+	Use the store's select opertor,passing in the desired slice of state
+	this.store.pipe(select('products')).subscribe(
+	products=>this.displayCode=products.showProductCode
+	);
+Developer tools and debugging
+Steps to install the redux store dev tools
+	1.install browser Redux DevTools extension
+	2.install @ngrx/store-devtools
+	3.Intialize @ngrx/store-devtools module (app module)
+	npm install @ngrx/store-devtools
+	import {StoreDevtoolsModule} from '@ngrx/store-devtools'
+	StoreDevtoolsModule.instrument({
+	name:'some name',
+	maxAge:25,
+	
+	})
+Strongly Typing the state
