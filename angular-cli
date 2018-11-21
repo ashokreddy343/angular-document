@@ -68,6 +68,26 @@ generating pipes
   
 generating NgModules
   ng g m login 
+ what ?
+	Command line interface tool
+	perform testing,bundling and deployment
+Why ?
+	Issues when creating from scratch
+	Is the seed project the right one?
+	Diffcult to maintan standards
+Angular CLI makes it easy to create an application that already works,right out of the box
+The best part is,it already follows angulars best practices.
+Installing Angular CLI
+	node -v
+	npm -v
+	npm i -g @angular/cli
+	ng -v
+ng new sampleapp
+ng serve -o
+ng new sampleproject --skip-install
+ng new sampleproject --dry-run
+ng new demoApp2 --skip-install 
+ng new demoApp2 --skip-install --directory public --source-dir ng
   
 
 
