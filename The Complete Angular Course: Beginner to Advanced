@@ -1,0 +1,66 @@
+What is Angualar ?
+	A framework for building client applications
+	in HTML,CSS,and javascript/Typescript
+Angular Fundamentals
+Builiding blocks of Angular apps
+Components
+	Data+HTML Template + Logic
+Modules
+Templates
+{{}} //interpolation
+<li *ngFor="let course of courses">{{course}}</li>
+Services
+Displaying Data and Handling Events
+Property Binding
+	<img [src]="title"/>
+Attribute Binding
+	DOM vs HTML
+	<td [attr.colspan]="colspan"/>
+Adding Bootstrap
+	3.3.7(major.minor.patch)
+	@import "~bootstrap/dist/css/bootstrap.css"							
+Class Binding
+	<button class="btn btn-primary" [class.active]="isActive">Save</button>
+Style Binding
+	<button [style.backgroundColor]="isActive?'blue':'white'">Save</button>
+Event Binding
+	<button (click)="onSave()">save</button>
+Event Filtering
+Template Varibles
+	<input #email type="text"/>
+Two-way data binding
+	<input type="text" [(ngModel)]="name"/>		
+Pipes
+	pipes is used to format data
+	Uppercase
+	Lowercase
+	Decimal
+	Currency
+	Percent
+	{{title | uppercase | lowercase}}
+	{{students | number}}
+	{{ratng | number:'2.1-1'}}
+	{{price | currency:'AUD':true:'3.2-2'}}
+Custom Pipes
+	import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'summary'
+})
+export class SummaryPipe implements PipeTransform {
+
+  transform(value: any, args?: any): any {
+    if(!value)
+      return null;
+    return value.substr(0,50)+"...";
+  }
+
+}
+
+Building Re-Usable Component
+Component API
+	using input and output we can make it as public API
+Input Properties
+
+
+
