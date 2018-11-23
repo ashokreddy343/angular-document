@@ -61,6 +61,313 @@ Building Re-Usable Component
 Component API
 	using input and output we can make it as public API
 Input Properties
+Input Properties
+	@Input() isFavorite 
+Directives
+Structural 
+	Modify the structure of the DOM
+Attribute
+	Modify the attribute of DOM Elements
+	ngIf
+<div *ngIf="courses.length>0">
+  List of courses
+</div>
+<div *ngIf="courses.length==0">
+  No courses yet
+</div> -->
+
+<div *ngIf="courses.length>0;else noCourses">
+  List of courses
+</div>
+<ng-template #noCourses>
+  No courses yet
+</ng-template>
+
+<div *ngIf="courses.length>0;then courseList else noCourses">
+</div>
+<ng-template #courseList> 
+List of courses
+</ng-template>
+<ng-template #noCourses>
+  No courses yet
+</ng-template>
+
+Hidden Property
+	<div [hidden]="courses.length==0">
+  		List of courses
+	</div>
+	<div [hidden]="courses.length>0">
+	  No courses yet
+	</div>
+For small element trees -we can use [hidden]
+For large element trees -*ngIf
+
+ngSwitchCase
+ngFor
+	<button (click)="onAdd()">Add</button>
+<ul>
+  <li *ngFor="let course of courses">
+    {{course.name}}
+    <button (click)="onRemove(course)">Remove</button>
+  </li>
+</ul>
+
+export class AppComponent  {
+  name = 'Angular';
+  courses=[
+    {id:1,name:'course1'},
+    {id:2,name:'course2'},
+    {id:3,name:'course3'}
+  ];
+  onAdd(){
+    this.courses.push({id:4,name:'course4'});
+  }
+  onRemove(course){
+   let index=this.courses.indexOf(course);
+   this.courses.splice(index,1);
+  }
+}
+
+ngFor Track By
+	<ul>
+	  <li *ngFor="let course of courses; trackBy:trackCourses">
+	    {{course.name}}
+	    <button (click)="onRemove(course)">Remove</button>
+	  </li>
+	</ul>
+	trackCourses(index,course){
+   	 return course? course.id:undefined;
+  	}
+
+The Leading Asterisk
+ngClass
+	<span [ngClass]={}></span>	
+ngStyle
+	when we are dealing with multiple style bindings
+	 we can use ngStyle
+Safe Traversal Operator
+	<span>{{task.assignee?name}}</span>	
+Creating Custom Directives
+	HostListner:it is used to access DOM Elemenes
+	ElementRef: it is a service,gives us access DOM Objects
+	<input type="text" appInputFormat/>
+	<input type="text" [appInputFormat]="'uppercase'"/>
+	import { Directive,HostListener,ElementRef,Input } from '@angular/core';
+
+@Directive({
+  selector: '[appInputFormat]'
+})
+export class InputFormatDirective {
+  // @HostListener('focus') onFocus(){
+  //   console.log("on Focus");
+  // }
+    @Input('appInputFormat') format;
+   
+  constructor(private el:ElementRef) { }
+@HostListener('blur') onBlur(){
+    //console.log("on Blur");
+    let value:string=this.el.nativeElement.value;
+    if(this.format=='lowercase'){
+        this.el.nativeElement.value=value.toLocaleLowerCase();
+    }
+    else{
+      this.el.nativeElement.value=value.toLocaleUpperCase();
+    }
+    
+  }
+}
+
+Template Driven Forms
+	Implement forms with different kinds of input fields
+Types of forms
+	FormControl:each form control has value,touched,untouched,dirty,pristine,valid,invalid,errors
+	FormGroup:it represents group of controls in a group
+Creating Controls
+	Directives
+		Template-driven
+			1.Good for simple forms
+			2.Simple validation
+			3.Easier to create
+			4.Less code
+	Code
+		Reactive
+			More control over validation logic
+			Good for complex forms
+			Unit testable
+ngModel
+	<input id="firstName" ngModel name="firstName" #firstName="ngModel" type="text" class="form-control"/>
+Adding Validation
+	<div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">First Name is required</div>
+Specific Validation Errors
+	<input  required id="firstName" minlength="3" maxlength="10" pattern="banana" ngModel name="firstName" #firstName="ngModel" type="text" class="form-control"/>
+  <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+    <div *ngIf="firstName.errors.required">First Name is required</div>
+    <div *ngIf="firstName.errors.minlength">First name should be minimum 3 characters</div>
+    <div *ngIf="firstName.errors.pattern">First name does not match pattern</div>
+    </div>
+  </div>
+
+Styling Invalid Input Fields
+	.form-control.ng-invalid.ng-touched{
+	border: 2px solid red;
+	}
+
+Cleaner Templates
+	break the code each attribute
+ngForm
+ <form #f="ngForm" (ngSubmit)="submit(f)">	
+ngModelGroup
+	<div ngModelGroup="contact">
+ngForm has output property but ngModelGroup does not have output property
+Control classes and directives
+Disabling the submit button
+	<button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+Working with checkboxes
+
+Reactive Forms
+	More conrol over form structure
+	More control over form behaviour
+Creating Controls Programmatically
+	import {FormGroup,FormControl} from '@angular/forms';
+	import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+	form=new FormGroup({
+     	username:new FormControl(),
+     	password:new FormControl()
+   	})
+	<form [formGroup]="form">
+  <div class="form-group">
+    <label for="username">UserName</label>
+    <input formControlName="username" type="text" id="username" class="form-control"/>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input formControlName="password" type="text" id="password" class="form-control"/>
+  </div>
+   <button class="btn btn-primary">Sign Up</button>
+	</form>
+
+Adding Validation
+	<div *ngIf="username.touched && username.invalid" class="alert alert-danger">Username is required</div></div>
+	orm=new FormGroup({
+     username:new FormControl('',Validators.required ),
+     password:new FormControl('',Validators.required)
+   })
+   get username(){
+     return this.form.get('username');
+   }
+
+Specific validation errors
+	 username:new FormControl('',[Validators.required,Validators.minLength(3)] ),
+Implementing custom validators
+Asynchronous Operators
+	Calling the server(AJAX)
+	Timer functions
+Asynchrounous Validators
+Showing a Loader Image
+Validating the Form Upon Submit
+Nested FormGroups
+FormArray
+	form =new FormGroup({
+	   topics:new FormArray([])
+	});
+	addTopic(topic:HTMLInputElement){
+	this.form.get('topics') as FormArray).push()
+	}				
+FormBuilder
+	
+Consuming HTTP Services
+JSONPlaceHolder
+	jsonplaceholder.typicode.com/posts :fakeservice
+Getting Data
+	import {HttpClient} from '@angular/common/http';
+	constructor(private http:HttpClient) {}
+	this.http.get('http://jsonplaceholder.typicode.com/comments').subscribe(res=>{})
+Creating Data
+Updating data
+Deleting data
+OnInit Interface
+Separation of Concerns
+	our classes should responsible single responsibility
+Handling Errors
+	Unexpected
+		Server is offline
+		Network is down
+		Unhandled exceptions
+	Expected
+		Not found errors(404)
+		Bad request errors(400)
+Handling unexpected errors
+	
+Routing and Navigation
+Configuring Routes
+Deployment
+	ng build --prod
+JIT vs AOT
+Benefits of AOT
+	Faster startup
+	Smaller bundle size
+	Catch template errors earlier
+	Better security
+Angular compiler in action
+	node_modules/.bin/ngc
+Building applications with Angular CLI
+	ng build --prod
+Enviornments
+	Development
+environment.ts
+	 export const environment={
+	   production:false
+	}
+	Test
+	Production
+	environment.prod.ts
+	 export const environment={
+	   production:true,
+	  navBarBackgroundColor:'blue'
+	}
+Adding a Custom Environment
+	adding custom enviornment in angular.json file
+	ng serve --environment=test
+	ng build --evironment=test
+Linting with Angular CLI
+	ng lint
+	ng lint --fix
+Deployment options
+	Github pages
+		No back -end
+	Firebase
+		firebase as the back-end
+	Heroku
+		Custom back end
+Deploying to Github pages
+	npm i -g angular-cli-ghpages
+Deploying firebase
+	Provided by google
+	https://console.firebase.google.com	
+	npm i -g firebase-tools
+	firebase login
+	firebase init
+	firebase deploy
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
