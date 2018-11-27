@@ -1,0 +1,120 @@
+Javascript
+	1.JavaScript is a language of the Web.
+Prototypal inheritance – Inherited property 
+	1.Objects inherit from Objects
+	2. we know an object is a prototype of classes
+How do we implement prototypical inheritance ?
+	Use property called _proto_
+	ex:var automobile={engine:true}
+	   var car={tyres:4}
+	car._proto_=automobile;//inheritance
+Is __proto__ only way to prototypal inheritance?  
+	No, you could you Object to create it
+	var automobile={engine:true};
+	var car=Object.create(automobile);
+Is there any other way to check property in object?
+	Yes,you could use below pattern to validate,
+	"engine" in car;//true
+	"valueOf" in {};//true
+Javascript Data types
+How many data types are there in JS?
+	there are two types of data types in Javascript
+	1.Primitive data type
+		a)string b)Number c)Boolean d)Undefined e)Null
+	2.Non-primitive(reference)data type
+		a)object b)Array c)RegExp
+How do you specify data type in JS? 
+	It’s simple and could be defined using var keyword only 
+	var x=10;
+	var x="javascript"
+To calculate size of javascript we can use sizeof.js we can use
+	ex:var object={'boolean':true,'number':1,'string':'a','array':[1,2,3]};
+	    var size=sizeof(object);
+What is the difference in Undefined and Null? 
+	 1.In JavaScript, undefined means a variable has been declared but has not yet been assigned a value, such 
+		ex:var TestVar;
+	  	alert(TestVar); //shows udefined
+	  	alert(typeof TestVar); //shows undefined
+	  2.null is an assignment value.it can be assigned to a varible as
+	    no value
+	   	var TestVar=null;
+		alert(TestVar);//shows null
+		alert(typefo TestVar); //shows object
+Objects
+	Objects are varibles too.However,objects can contain many values
+	var person={age:50;address:"delhi"}
+
+Do you know simple way to create objects? 
+	var obj={}; //undefined
+	typeof(obj);//object
+	To Access object propeties in two ways
+		1.objectName.propertyName
+		2.objectName["propertyName"]
+		ex:person.age or Person["age"]
+Object Methods
+	you access an object method with the following sytax
+	 	objectName.methodName();
+	ex:var person = {age:59, address:"Delhi", fullName:function(){console.log('Joh n Doe');return 'John Doe';}}; 
+		 person.fullName(); 
+Loop over all properties in Object 
+	 for(a in person){console.log(a)} 
+
+How do you add/delete properties to existing object? 
+	person.country="india"
+	delete person.age; 
+Can you access a property, which do not exist in Object? 		
+	Yes, you can access a property on an object that does not exist but will result in undefined
+	person.lastName;//undefined
+
+Can you access a method, which do not exist in Object? 
+	No, you cannot access a method on an object that does not exist because it’ll yield an error
+	person.lastName();//Uncaught TypeError:person.lastName is not a function
+
+Javascript Engines
+What is the difference between interpreted v/s compiled languages? 
+	compiled
+		1.: In compiled language, a compiler will translate the program directly into code that is specific to the target machine, which we call machine code
+		2.Then the computer will run the machine code on its own. 
+ 	Interpreted:
+		1.In an interpreted language the code is not directly run by the machine
+		2.there is another program which reads and then executes the code
+		3.This other program is known as the interpreter. 
+
+Is JavaScript an interpreted language or compiled language? 
+	Historically it was designed as interpreted language. 
+
+Which category of language JavaScript belongs?	
+	JavaScript is considered as a high-level language. It’s readable by humans easily. 
+
+What is a JavaScript engine? 
+	1. It’s a program or library, which executes JavaScript code. 
+Evolution of javascript engines
+	1.mozila : SpiderMonkey
+	2.Chrome :V8
+	3.IE & Edge : Chakra
+	4.Node.js :v8
+	5.PhantomJs(headless browser) : Javascript core
+
+Which JavaScript engine scores high? 	
+	1. You can compare how various engines perform in benchmarking produced on 
+		http://arewefastyet.com
+How Javascript engine works?
+	Hers is the process
+	SourceCode->Parser->AST->ByteCode Generator->Bytecode->Interpreter->Machine code
+	The parser takes JavaScript and generates a Abstract Syntax Tree (AST). 
+	AST: It’s just a syntax tree, and a tree representation of source code
+	After AST is generated, there are two choices depending upon JavaScript engine to generate bytecode 
+	 Google V8 & Chakra generates Native code and both are really fast engines to run JavaScript
+
+Common Mistakes
+	1.Mistake 1: Equality checks 
+	   use 1===='1'
+	2.Mistake 2: Concatenation 
+		JavaScript uses + operator for concatenation & addition
+Is JavaScript an object oriented language? 
+	 1.Yes it is, but many developers differ because there is no “class” keyword in it.
+	 2.I believe JavaScript has all the ingredients to be an OOP language
+
+Encapsulation
+	1.Encapsulate means “enclose (something) in or as if in a capsule”. 
+	2. It refers enclosing all the functionalities within that object, so it is hidden from rest of the application.
