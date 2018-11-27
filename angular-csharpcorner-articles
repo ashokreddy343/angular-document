@@ -1,0 +1,31 @@
+1.Router-Outlet In Angular
+	1.load the different components dynamically based on the activated component or current route state
+	2.Navigation can be done using router-outlet directive
+	3.To enable routing we need to use router-outlet
+		<router-outlet></router-outlet>
+
+2.Reactive forms
+	import { FormGroup, FormArray , FormControl, FormBuilder } from '@angular/forms';  
+	
+3.Sharing Data Between Components In Angular
+	Input decorator
+		The input decorator ‘@Input()’ is used to send the data from parent component to the child component.
+	Ex:parent componet
+		<app-test [parentObj]="parentProp"></app-test></div>
+		public parentProp:string="Parent data value";
+	   Child componet
+		@Input('parentObj1') public prop1:string="second";
+		<h3>{{prop1}}</h3>
+	Output decorator
+		The output decorator ‘@Output()’ is used to send data from the child component to parent component.
+	Ex:parent component
+		<app-test [parentObj]="parentProp" (childComponent)="childData=$event"></app-test></div>
+		public childData:string="";
+		<div>Child data {{childData}}</div>
+	   child component
+		@Output() public childComponent=new EventEmitter();
+		sendData(){
+   		 this.childComponent.emit('Child component data');
+  		}
+		<button (click) = "sendData()">Send to parent</button>
+Angular @ViewChild Directive And Components Interaction
