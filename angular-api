@@ -1,0 +1,60 @@
+angular api
+1.common/http
+	a)HttpInterceptor,HttpRequest,HttpHandler,HttpEvent
+		1.HttpInterceptor interface to make authenticated HTTP requests.
+		2.To implement an interceptor, you’ll want to create a class that’s injectable and that implements HttpInterceptor
+		3.The class should define an intercept method to correctly implement HttpInterceptor. 
+		4.The intercept method takes two arguments, req and next, and returns an observable of type HttpEvent
+		5.req is the request object itself and is of type HttpRequest
+		6.next is the http handler,of type HttpHandler.The handler has a handle method that returns
+		  our desired HttpEvent observable
+		7.HttpHandler:Transforms an HttpRequest into a stream of HttpEvents, one of which will likely be a HttpResponse
+		import { Injectable } from '@angular/core';
+import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpResponse }
+  from '@angular/common/http';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/do';
+
+@Injectable()
+export class MyInterceptor implements HttpInterceptor {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+
+    return next.handle(req).do(evt => {
+      if (evt instanceof HttpResponse) {
+        console.log('---> status:', evt.status);
+        console.log('---> filter:', req.params.get('filter'));
+      }
+    });
+
+  }
+}
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MyInterceptor } from './interceptors/my.interceptor';
+
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, HttpClientModule],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+
+Multiple interceptors
+providers: [
+  { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: MySecondInterceptor, multi: true }
+],
+
+The interceptors will be called in the order in which they were provided. So with the above, MyInterceptor would handle http requests first.
+HttpRequest objects are immutable, so in order to modify them, we need to first make a copy, then modify the copy and call handle on the modified copy
