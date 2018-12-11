@@ -29,3 +29,152 @@
   		}
 		<button (click) = "sendData()">Send to parent</button>
 Angular @ViewChild Directive And Components Interaction
+
+Angular getting started 
+Angular
+	1.it is javascript framework
+	2.for building client-side applications
+	3.Using HTML,CSS and Javascript
+Why angular ?
+	1.Expressive HTML
+	2.Powerfull data binding
+	3.Modular By design
+	4.Buil-in Back-End integration
+Why a new Angular ?
+	1.Built for speed
+	2.Modern
+	3.Simplified API
+	4.Enhances Productivity
+Component
+	Component=Template+Class(propeties,Methods)+Metadata
+	Template
+		1.View Layout
+		2.Created with HTML 
+		3.Includes binding and directives
+	Class
+		1.Code supporting the view
+		2.Created with Typescript
+		3.Properties:Data
+		4.Methods:logic
+	Metadata
+		1.Extra data for Angular
+		2.Defined with a decorator
+	Decorator
+		1.A function that adds metadata to a class,it's members,
+		  or it's method arguments
+		2.Prefixed with an @
+		3.Angular provides built-in decorators
+		4.@Component
+Templates,Interpolation,and Directives
+	Interpolation
+		{{pageTitle}}
+	Directives
+		Structural Directives
+			*ngFor,*ngIf
+Data Binding & Pipes
+	Property Binding
+		<img [src]='product.ImageUrl"/>
+			src-element property
+			product.imageurl:template expression
+	Event Binding
+		<button (click)='toggleImage()'/>
+	Two-way Binding
+		<input [(ngModel)]="listFilter"/>
+	Pipes
+		Transforming data with pipes
+		date,number,decimal,percent,currency,json,slice
+Encapsulating Component Styles
+	styles:['thead {color:#337AB7}]
+	styleUrls:['./product-list.component.css']}
+Component Lifecycle
+	OnInIt:Perform component initialization,retrieve data
+	OnChanges:Perform action after change to input poperties
+	OnDestroy:Perform cleanup
+Nested Components
+	1.Passing Data to a Nested Component Using @Input
+	2.Raising an Event from a Nested Component Using @Output
+Services and DI
+	Service
+		A class with a focused purpose
+		Used for features that:
+			1.Are independent from any particular component
+			2.Provide shared data or logic across components 
+			3.Encapsulate extenrnal interactions
+Create Custom Directive in Angular
+	1.Angular Directive is a TypeScript class which is declared as a @directive decorator.
+	2.what are decorators
+		a)Decorators are functions that modify javascript classes
+		b)Decorators are used for attaching metadata to classes, 
+		  it knows the configuration of those classes and how they should work.
+	3.Three Types of Directives Available in ANgular
+		a)Component Directives
+		b)Attribute Directives
+			Attribute directives deal with changing the look and behavior of the dom element
+		c)Structural Directives
+			A structure directive basically deals with manipulating the dom elements
+			 Structural directives have a * sign before the directive. For example, *ngIf and *ngFor.
+	4.Why we Need Directives in Angular
+		a)If you want similar functionality across all components
+	5.Custom Directive
+Angular: Set Base URL Dynamically
+	http://domain.com/client1/home
+	http://domain.com/client2/home
+	http://domain.com/client3/home				
+	Using DI
+		providers: [
+	    	{ provide: 'BASE_URL', useFactory: getBaseUrl }
+		]
+	Using HttpInterceptors
+		import { Injectable } from '@angular/core';
+		import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+		import { Observable } from 'rxjs/Observable';
+
+		@Injectable()
+	export class ApiInterceptor implements HttpInterceptor {
+	    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        	
+        	const baseUrl = document.getElementsByTagName('base')[0].href;
+        	const apiReq = req.clone({ url: `${baseUrl}${req.url}` });
+        	return next.handle(apiReq);
+ 	   	}
+		}
+		{ provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true } 
+https://github.com/oferh/ng2-completer	
+
+Angular 2 Http get() Example
+Http.get()
+	1.Http.get() performs a request with HTTP GET method
+	2.get(url: string, options?: RequestOptionsArgs) : Observable<Response> 
+	3.It accepts a HTTP URL and returns Observable instance. 
+Observable and promise
+	We can use either Observable or Promise with http.get(). 
+	Observable
+		1.This is a RXJS API.
+		2.Observable is a representation of any set of values over any amount of time
+		3.All angular Http methods return Observable
+		4. Observable provides methods such as map(), catch() etc
+		5.map() applies a function to each value emitted by source Observable and returns finally an instance of Observable.
+		6.catch() is called when an error is occurred. catch() also returns Observable. 
+	Promise
+		1.This is a JavaScript class
+		2.Promise is used for asynchronous computation
+		3.Promise is a proxy for a value which is not known when the promise is created
+		4.Promise has methods such as then(), catch() etc
+		5.http.get() returns Observable and to convert it into Promise we need to call RxJS toPromise() on the instance of Observable
+		6.The then() method of Promise returns a Promise and that can be chained later.
+		7.The catch() method of Promise is executed when an error is occurred and it also returns Promise. 
+		
+Prefetching Data Using Route Resolvers
+		Providing Data with a Route
+			1.Route Parameters 2.Optional Route Parameters 3.Query Parameters
+			4.Route's Data Property 5.Route Resolver 6.Angular Service
+		Rote's Data Property
+			Angular Module
+				RouterModule.forChild([
+				{
+				 path:'products',component:ProductListComponent,data:{pageTitle:'Product List'
+				}
+			Component Class
+				this.pageTitle=this.route.snapshot.data['pageTitle']
+				
+			
