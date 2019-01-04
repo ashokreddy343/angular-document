@@ -1,0 +1,68 @@
+Angular: Getting Started
+Why a new Angular ?
+	Built for speed
+	Modern
+	Simplified API
+	Enhances Productivity
+Anatomy of an Angular Application
+	Application=Component+Component+etc
+	Componet=Template(UI)+Class(Properties+Methods)+Metadata
+First Things First
+	Selecting a Language
+		ECMAScript(ES)
+		ES 3,ES5, ES 2015(formerly know as ES6)
+		Typescript
+	Typescript Editors
+		Visual Stuido
+		Visual Studio Code
+		Webstorm
+		Atom
+		Eclipse
+	About Modules
+Introduction to Components
+	What is a component ?
+		Component=Template+Class(properties,methods)+metadata
+			Template=view layout,Created with HTML,Includes binding and directives
+			Class=Code supporting the view,Created with Typescript,Properties:data,Methods:logic
+			MetaData
+				1.Extra data for angular
+				2.Defined with a decorator
+				3.Decorator is a function
+		Creating the component class
+			export class AppComponent{
+			  pageTitle:string='Acme Product Management"
+			}
+		Defining the Metadata
+			@Componet({
+				selector:'',
+				template:''
+				})
+			Decorator
+				A function that adds metadata to a class,its members,or its method arguments
+				Prefixed with an @
+				Angular provides built-in decorators
+				@Component()
+		Importing What we need
+			1.Before we use an external function or class,we define
+			  where to find it
+			2.Angular is Modular
+				@angular/core,@angular/animate,@angular/http,@angular/router
+	Bootstraping Our App Component
+	1.What is the minimum definition of a component?
+		The absolute minimal configuration for a @Component in angular is a template.
+	2.What is the difference between a component and a directive?
+		component
+			1.@Component meta-data annotation is used to register the components
+			2.The components are used to create UI widgets
+			3.The components are used to split to application into
+			   smaller parts
+			4.Only one component is used per DOM element
+			5.In the components,@View,template and templateUrl 
+			  are mandatory in the components
+		Directive
+			1.@Directive meta-data annotation is used  to register the directives.
+			2.The directives are used to add behavior to existing DOM elements.
+			3.The directives are use to design a reusable components.
+			4.More than one directive are used per DOM element
+			5.The directive do not have @View etc.
+	
