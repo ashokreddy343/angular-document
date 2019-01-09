@@ -1,0 +1,164 @@
+Angular: The Big Picture
+	Introduction
+		What is Angular ?
+			-A tool to help you build interactive websites
+			-One of many alternatives
+		Versions of angular
+			-angular 2,3,4,5,6,7
+			-Major version every 6 months
+			-LTS- Long Term Support(1 year)
+	Benefits & Features of Angular
+		Universal Benefits
+			-Reduction of Cost
+			-Standrd compliance
+			  	-ES6+
+Route Guards
+	1.Guarding routes means whether we can visit the route or not. 
+	2.To achieve route guards, Angular provides following interfaces that are 
+	  contained in @angular/router package. 
+	CanActivate
+		1.CanActivate decides whether we can navigate to a route or not.
+		2.It is used to redirect to login page to require authentication.
+		3.CanActivate interface has a method named as canActivate() 
+		4.  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): 
+		     Observable<boolean>|Promise<boolean>|boolean
+		5.
+	CanActivateChild
+		1.CanActivateChild decides whether we can navigate to child routes or not.
+		2.It is used to decide link access on the basis of authorization
+	CanDeactivate
+	Resolve
+	CanLoad
+	
+				-Modules
+				-Internationalization & Accessibility
+			-Performance
+			-Open Source
+			-Popularity
+		Subjective & Situational Benefits
+			-Framework
+				-Router,http,forms,rxjs etc
+				-Less Decisions
+		Features
+			-Progressive Web Apps
+			-Lazy Loading
+			-Forms Library
+			-RXJS
+			-Fully Featured Router
+			-Animations
+		Advanced Features
+			-Server-side Rendering
+			-Mobile
+			-Angular Language Service
+			-ngUpgrade
+	Angular Architecture	
+		One Way Data Flow
+		Dependency Injection
+		Components
+		Directives
+		Templates
+			-How components display
+		Zone.js
+			-Change detection we can use zone.js
+		Rendering Targets
+			-Browser-platform
+			-Browser-platform-dynamic
+			-Browser/DOM
+			-Server-side
+			-Native Mobile Apps
+			-Native Desktop Apps
+	Tooling
+		CLI-
+			-Module Handling
+			-Bundling
+			-Minifying
+			-Typescript/ES6 Transpilation
+			-Browser Shims
+			-Zone.js
+		Server-Side Rendering
+			Main Benefits
+				Performance
+					-Initial Download Size
+					-Render Time
+				Search Engine Optimization
+			Server-side Rendering Operation Modes
+				-Full Pre-Render
+				-Dynamic Pre-Render
+				-Client-Side Switch
+		Mobile & Native Frameworks
+			Mobile
+				-Ionic
+				-NativeScript
+			Desktop
+				-Electron
+		Testing Tools
+			Karma - unit testing
+			Protractor -end to end testing
+			Alternatives
+				-Jest
+				-theIntern
+				-Cypress.io
+			Angular Testing Utilities
+				-TestBed
+				-Async & fakeAsync
+				-MockBackend
+		AOT Compiler
+			JIT Process
+		Editors
+			Typescript
+				-Better Intellisense
+				-Catch Typing Bugs
+			Angular Language Services
+	Tips,Tricks & Gotchas
+		TypeScript & Decorators
+			-@Decorator(parameters..)
+		Custom Pipes	
+			-Pure vs impure
+				Pure:Only evaluated when input changes
+				Impure:evaluated on every change detection cycle
+			Pure are simple,impure are very complex
+		Module API
+			imports
+			exports
+			bootstrap
+			providers
+			declartions
+		Cryptic Error Messages
+			Frequent
+			Frustrating
+			Slow down development
+		build
+		RxJS
+			Promises vs observable
+			self-subscribe or not
+			Forgetting to subscribe
+			Accidentally making multiple http requests
+			Hot vs cold observables
+			shared observables
+		Tips & Tricks
+			-Use the CLI
+			-Follow the style guide
+			-Do sorting & filtering in your component
+			-Learn & use TypeScript
+			-Learn & use Ngrx
+			-Learn Webpack
+			-Use Lazy loading
+			-Use VS Code
+			-Don't touch the DOM directly
+			-Understand what you are sending down to the browser
+	Angular:Present & Future
+		Conditions to Consider Using Angular
+			-Enterprise
+			-Typed backend
+			-AngularJs
+			-Templates separate from code
+			-Large company backing
+			-Framework vs libraries
+			-Established track record
+		Future of Angular
+			Labs
+			Elements
+			Schematics
+			Universal
+			Migrations
+			Build
