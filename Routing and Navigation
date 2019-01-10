@@ -1,0 +1,40 @@
+https://www.concretepage.com/angular/
+Angular Custom Error Handler
+	1.Angular provides ErrorHandler class for centralized exception handling
+	2.We create custom error handler service by implementing ErrorHandler class
+	3.It has a method handleError(error) that executes whenever the application
+	  throws error anywhere in the application.
+	4.We need to override it to define our custom error handler.
+	5.We can use our custom error handler as global error handler. 
+	ErrorHandler
+		1.The default implementation of ErrorHandler prints error messages to browser console.
+		2.class ErrorHandler{ handleError(error:any):void}
+	Steps to Create Custom Error Handler
+		Step-1:Create a service by implementing ErrorHandler and overriding its handleError() method.
+			import {Injectable,ErrorHandler} from '@angular/core'
+			import {HttpErrorResponse} from '@angular/common/http'
+			@Injectable()
+			export class GlobalErrorHandlerService implements ErrorHandler{
+				handlerError(error:any){
+				  if(error instanceof HttpErrorResponse){
+					//Backend returns unsuccessful response codes such as 404, 500 etc.				  
+          				console.error('Backend returned status code: ', error.status);
+        				  console.error('Response body:', error.message);          	  
+				      } else {
+				          //A client-side or network error occurred.	          
+		          console.error('An error occurred:', error.message);          
+			      }     
+    			  }
+			}			 
+		Step-2:We need to configure our GlobalErrorHandlerService in 
+		      application module in providers metadata of @NgModule as following.
+			@NgModule({
+  				------
+ 			 providers: [GlobalErrorHandlerService, { provide: ErrorHandler, useClass: GlobalErrorHandlerService }]
+			})
+			export class AppModule { } 
+			-Now default implementation of ErrorHandler will not be called by application	 
+		Step-3 :Error will be thrown in application automatically or by using throw keyword
+		https://www.concretepage.com/angular/angular-custom-error-handler
+		https://angular-nrcmjn.stackblitz.io/error
+Angular CanLoad Guard Example
