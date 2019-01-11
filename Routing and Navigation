@@ -37,4 +37,80 @@ Angular Custom Error Handler
 		Step-3 :Error will be thrown in application automatically or by using throw keyword
 		https://www.concretepage.com/angular/angular-custom-error-handler
 		https://angular-nrcmjn.stackblitz.io/error
+
 Angular CanLoad Guard Example
+	1.CanLoad guard is used to decide if a module can be loaded or not configured 
+	  with loadChildren property.	
+	2.CanLoad is an interface with canLoad method
+	3.To use CanLoad guard we need to create a service by implementing 
+	  CanLoad interface and override its canLoad method
+	4.Then that service will be configured with canLoad property in route 
+	  configuration with loadChildren
+	5.When canLoad method of our service returns true then the feature module protected by
+	  canLoad will be lazy loaded otherwise it will not be loaded
+	6.CanLoad guard and allow to load it only after user authentication
+	CanLoad
+		1.CanLoad is a route guard to decide if a module can be loaded configured with loadChildren property.
+		2.loadChildren property is a reference to lazy loaded child routes.
+Angular 2 Routing and Navigation Example
+	1.Angular routing provides services, directives and operators that manage the
+	  routing and navigation in our application
+	RouterModule and Routes
+		1.RouterModule is a separate module in angular that provides required services and directives to 
+		  use routing and navigation in angular application
+		2.Routes defines and array of roots that map a path to a component.
+		3.Paths are configured in module to make available it globally.
+		4.import { RouterModule, Routes } from '@angular/router'; 
+		5.const routes: Routes = [
+			{ path: 'manage-book', component: ManageBookComponent },
+			{ path: 'update-book/:id', component: UpdateBookComponent }, 
+			{ path: '', redirectTo: '/manage-book ', pathMatch: 'full' },
+			{ path: '**', component: PageNotFoundComponent }
+			] 
+		6.imports: [ RouterModule.forRoot(routes) ] 
+	Router
+		1.It is used to navigate from one component to another component.
+		2.To use Router in any component,follow the steps
+			-Import Router 
+				import {Router} from '@angular/router'
+			-Router Instance:Make Router service available in component using dependency injection with constructor
+				constructor(private router: Router) { 
+				}		 
+			-Using Router navigate()
+				-Call navigate() method of Router and pass path and parameter if any, 
+				 to navigate from one component to another component
+				-this.router.navigate(['/update-book',id])
+	ActivatedRoute and Params
+		1.ActivatedRoute is an angular service that contains route specific information such as route parameters
+		2.Params is an angular router API that contains the parameter value
+		3.To get the parameter value from Params we need to pass key
+		4.import { ActivatedRoute, Params } from '@angular/router'; 
+		5.constructor(private route: ActivatedRoute, private bookService: BookService) {} 
+	Location
+		1.Location is a service that is used to interact with browser URL for 
+		  example navigating back and forward
+		2.Location has methods such as go(), forward() and back() etc
+		3.import { Location } from '@angular/common'; 
+		4.constructor(private location: Location) { }
+		5.this.location.back(); //if we want to go back
+	RouterLink and RouterLinkActive
+		1.RouterLink is a directive that is used to bind a route with clickable HTML element
+		2.RouterLinkActive is a directive that is used to add or remove CSS classes.
+		3.<a routerLink="/manage-book" routerLinkActive="active-link">Manage Book</a>
+		  <a [routerLink]="['/view-detail', book.id]">View Detail</a> 
+	RouterOutlet
+		1.RouterOutlet is a directive that is used as <router-outlet>.
+		2.The role of <router-outlet> is to mark where the router displays a view.
+		3.<router-outlet></router-outlet>	
+	
+Angular 2/4 Child Routes and Relative Navigation 
+	1.A route can have one or more than one child routes.	
+	2.Child routes can have their own child routes and so on
+	3.Route has different properties to handle route such as path, 
+	  component, outlet, children, loadChildren etc
+	4.To create child route for a route, we need to use children property
+	5.To load child module lazily in application module, we need to use loadChildren property.
+	6.Module can be loaded eagerly, lazily and preloaded
+	7.In lazy loading and preloading, modules are loaded asynchronously
+	8.Child can have path parameters and also it can have empty path
+	9.Router supports relative path using ActivatedRoute
