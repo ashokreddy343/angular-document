@@ -88,7 +88,120 @@ ng new sampleproject --skip-install
 ng new sampleproject --dry-run
 ng new demoApp2 --skip-install 
 ng new demoApp2 --skip-install --directory public --source-dir ng
-  
+Angular CLI ng new options
+	ng new MyFirstProject
+	ng new MyFirstProject --dry-run
+	ng new MyFirstProject --skip-install
+	ng new MyFirstProject --skip-tests
+	ng new MyFirstProject --inline-style
+	ng new MyFirstProject --inline-template
+Angular cli generate component
+	ng generate component abc
+	ng g c abc/xyz
+	ng g c pqr --flat
+	ng g c abc/jkl --flat
+	ng g c ghi -it -is --spec=false
+Angular cli generate service
+	ng g service myservice
+	ng g s employee -m=app.module
+	ng g s student -d
+	ng g s student --spec=false
+	ng g s student -d --spec=false --flat=false
+
+Angular cli generate module
+	ng g m student -d
+	ng g m studnet -d -m=app.module--spec=true
+	ng g m students -d -m=app.module --spec=true --flat=true
+
+angular cli generate directives, pipes and routing guards
+	ng g d directivename
+	ng g p pipename
+	ng g guard guardName
+	if we have more than one module we can skip the module to import
+	ng g d directiveName --skip-import -d
+	ng g d directiveName -m=app.module -d
+
+Angular cli generate class, interface and enum
+	ng g class className or ng g cl className
+	ng g cl employee
+	ng g cl employee/employee
+	ng g cl employee/employee --spec=true
+	ng g interface interfaceName 
+	ng g i interfaceName
+	ng g enum enumName
+	ng g e enumName
+
+Linting TypeScript
+	ng lint
+	ng lint --type-check
+
+Angular tslint rules
+	 some of the common angular linting rules in tslint.json file
+		1.quotemark rule specifies whether you want single or double quotes
+		2.no-trailing-whitespace rule disallows trailing whitespace at the end of a line
+		3.semicolon rule specifies that a line should be terminated with a semicolon
+		4.comment-format rule specifies that all single-line comments must begin with a space
+		5.component-class-suffix rule enforces that a component class should end with the suffix Component
+		6.use-life-cycle-interface rule enforces that you add the implements keyword for every lifecycle hook you use
+	ng lint --fix (some of the errors automatically fix)
+	ng lint --help
+
+Angular Routing
+	ng new employeeManagement --routing
+
+Angular CLI generate routing module
+	ng nnew RouingDemo --routing
+
+Angular cli ng serve options
+	ng serve --help
+	ng serve --open
+	ng serve --watch
+	ng serve --live-reload 
+	ng serve --port=4200
+	ng serve -extract-css
+
+Compile angular app
+	ng build command does a development build
+	ng build or ng build --dev
+	ng serve
+		1.Compiles and serves the application from memory
+		2.Does not write the build files to the disk
+		3.Typically used to run the application on local development machine
+		4.Cannot be used for deploying the build to another server 
+		  (Ex. Testing, Staging or Production server)
+	ng build
+		1.compiles the application to the "dist" folder
+		2.Can be used to produce both development & production builds
+		3.Typically used to deploy the application on another server
+
+Angular dev build vs prod build	
+	ng build or ng build --dev
+	ng build --prod
+	Source Maps : Development build generate Source Maps where as 
+		      production build does not. 
+	Minification & Uglification : A Prod Build is both minified and uglified, 
+				    where as a Dev Build is not
+	What is Minification 
+		1.The process of removing excess whitespace, comments, and optional 
+	 	  tokens like curly brackets and semicolons is called Minification. 
+	What is Uglification
+		1.The process transforming code to use short varible and function
+		  names called uglification
+	The minified and uglified version of the file is smaller in size than the full version, 
+		resulting in faster response times and lower bandwidth costs.
+	Tree Shaking : A Prod build is Tree Shaked, where as a Dev build is not
+	What is Tree Shaking ?
+		1.Tree shaking is the process of removing any code that we are not actually
+		  using in our application from the final bundle
+		2.it's one the most effective techinques to reduce the application size
+	AOT(Ahead-of-Time-Compilation)
+		1.With a production build we get AOT (Ahead-of-Time) compilation
+		2.the Angular component templates are pre-compiled, where as with a development build they are not.
+
+Angular AOT vs JIT
+	JIT - Just-in-Time Compilation : JIT compilation as the name implies, 
+	      compiles the application Just-in-Time in the browser at runtime
+	AOT - AOT compilation compiles the application at build time.
 
 
 
