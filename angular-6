@@ -11,41 +11,17 @@ ng g c employee/create-employee --spec=false --flat=true
 
  When you create a new Angular 6 project, this is included automatically by the Angular CLI. 
  
- ng g m app-routing --flat=true --module=app
  
- Two ways to create forms in angular
-  Template driven forms
-  Reactive forms (model driven forms)
- 
- Classes for creating a form cotrol tree
-  FormGroup
-  FormControl
-formGroup directive :Binds <form> elements FormGroup isntance
-formControlName directive : Binds input element to FormControl instance
-to work with reactive forms module we will import
-import {ReactiveFormsModule} from '@angular/forms';
-import {FormGroup,FormControl} from '@angular/forms';
-
-Angular form control and form group
-    in a reactive form we create instance of FormControl and FormGroup classes
-    Both FormControl and FormGroup classes inherit from AbstractControl base class
-    The AbstractControl class has properties that help us track both FormControl and FormGroup value and state
-    AbstractControl 
-      Properties
-          value
-          errors
-          valid
-          invalid
-          dirty
-          pristine
-          touched
-          untouched
-  FormControl tracks the value and state of an individual html element
-  FormGroup instance tracks the value and state of all the form controls in theat group
-  To Access a FormGroup and FormControl
-    employeeForm.controls.fullName.value
-    OR
-    employeeForm.get('fullName').value
-  Angular nested form groups
   
     
+Angular 6 features
+1.Angular Elemenets
+2.Service Worker Support
+3.Bye,Bye Template Element
+4.i18n
+5.Ivy:New Rendering engine
+6.ngModelChange
+7.ElementRef<T>
+8.Bazel Compiler
+9.RxJS 6.0
+10.Tree Shaking
