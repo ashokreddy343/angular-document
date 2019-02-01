@@ -1,0 +1,496 @@
+Getting Started with Angular 2 Step by Step using JavaScript
+	1.Polyfill packages handle browser compatibility
+	2.npm install npm@3.10.8 -g
+		node -v
+		npm -v
+	3.@angular/core: It provides basic packages such as metadata decorators, component, directive, 
+			dependency injection etc. 
+	4.@angular/common: It provides commonly used packages such as services, pipes etc. 
+	5.@angular/compiler: It converts angular template into the code that runs the application
+	6.@angular/platform-browser: It understands DOM and browser.
+	7.@angular/platform-browser-dynamic: It includes providers and bootstrap for 
+		the application that compile the angular template
+	8.core-js:It provides the feature of ES2015(ES6)
+	9.zone-js:It is a polyfill for zone specification for JavaScript language standards. 
+	10.rxjs : This polyfill is used for observable specification for 
+		  JavaScript language standards
+
+Angular 2 Interpolation Expression HTML Example
+	1.Interpolation is represented using double-curly braces.{{}}
+	2.Using Interpolation we evaluate expressions
+	3.It is also used for data binding
+	4.Interpolation can be used within HTML tag	
+	5.Angular uses double-curly braces {{ }} to represent interpolation.
+		Sum of 20 + 30 is  {{20 + 30}}  
+	6.Interpolation accesses values of component properties
+		{{title}}
+		{{primeMinster.name.lname}}
+	7.Interpolation can also be used to assign the values to tag attributes.
+		<img src="{{imageUrl}}"/>
+
+Angular 2 Template Reference Variable Example
+	1.A template reference variable is a reference to a DOM element or directive within a template
+	2.Using template reference variable we access the values of DOM element properties
+	3.Template reference variable is declared using # and ref- as prefix
+		ex:#myVar and ref-myVar
+		<input type="text" #myVar>
+		<input type="text" ref-myVar>
+	4.Template Reference varible using Input Text Box
+		<input type="text" #mobile placeholder="Enter Mobile Number"> 
+		mobile.placeholder
+		mobile.value
+		mobile.type
+	5.Template Reference Variable using Select Box
+		<select #myColor (change)="setData(myColor.value"></select>
+	6.Template Reference Variable with NgForm
+		<form (ngSubmit)="onSubmitPersonForm(myForm)" #myForm="ngForm">
+		</form>
+
+Angular 2/4 QueryList Example
+	1.QueryList is unmodifiable list of items that Angular keeps up to date 
+	  when the state of the application changes.
+	2.ViewChildren and ContentChildren uses QueryList to store elements or
+	  directives from view DOM and content DOM respectively
+	3.We can subscribe to the changes of QueryList to get the current state of QueryList.
+	4.It provides methods such as map, filter, find, forEach etc. 
+	QueryList: length, first, last
+		1.We can get the length of QueryList of current state, first element and
+		  last element as following.
+			@ViewChildren('bkWriter') allWriters:QueryList<WriteComponent>;
+			let len=this.allWriters.length;
+			let firstEl=this.allWriters.first;
+			let lastEl=this.allWriters.last;
+	QueryList.forEach
+		To iterate QueryList, it provides forEach() method
+		@ViewChildren('bkWriter') allWriters:QueryList<WriteComponent>;
+		this.allWriters.forEach(writer => console.log(writer.writerName + ' - ' + writer.bookName)); 
+	QueryList.changes
+		1.To listen the changes in QueryList, we can subscribe to its changes
+		2.QueryList provides changes getter property that returns the instance of Observable.
+		@ViewChildren('bkWriter') allWriters: QueryList<WriterComponent>
+		this.allWriters.changes.subscribe(list => {
+    		list.forEach(writer => console.log(writer.writerName + ' - ' + writer.bookName));	
+		}); 
+	QueryList.find
+		1.To find an element with a specific value, QueryList provides 
+		  find method that returns the matching object
+		2.@ViewChildren('bkWriter') allWriters:QueryList<WriteComponent>
+		let javaWriter = this.allWriters.find(writer => writer.bookName === 'Java Tutorials');
+	QueryList.map
+		1.To map the elements of a QueryList, it provides map method that returns 
+		  an array of mapped elements.
+		2.@ViewChildren('bkWriter') allWriters:QueryList<WriteComponent>
+		  let wnames = this.allWriters.map(writer => writer.writerName); 
+	QueryList.filter
+		1.To filter a QueryList, it provides filter method that returns 
+		  an array of elements matching the filter condition
+		2.@ViewChildren('bkWriter') allWriters:QueryList<WriteComponent>
+		let writers = this.allWriters.filter(writer => writer.writerName === 'Krishna');
+
+Angular 2/4 Dynamic Component Loader Example
+	1.Component can also be loaded dynamically at runtime using ComponentFactory, 
+	  ComponentFactoryResolver and ViewContainerRef	 
+	ComponentFactory and ComponentFactoryResolver
+		1.ComponentFactory is used to create instance of components
+		2.ComponentFactoryResolver resolves a ComponentFactory for a specific component.
+		   let componentFactory=this.componentFactoryResolver.resolveComponentFactory(component)
+	ViewContainerRef
+		1.ViewContainerRef represents a container where we can attach one or more views
+		2.Some important methods of ViewContainerRef are createEmbeddedView() and createComponent()
+		3.createEmbeddedView() is used to attach embedded views based on TemplateRef.
+		4.createComponent() instantiates a single component and inserts its 
+		  host view into the view container at a specified index
+		5.clear() method of ViewContainerRef destroys existing view in the container.
+
+Forms
+Angular 2 NgForm with NgModel Directive Example
+	1.To create HTML form using NgForm with NgModel is called template-driven form
+	2.NgForm directive is used with HTML form tag that can be exported in local template 
+	 variable to access form values and validation status and to pass entire form to our 
+	 class on form submit
+	3.When we create HTML form, we have to use name attribute in form fields
+	4.the role of NgModel is to register the form field with form using name attribute
+	5.NgModel is also used to bind the domain model of the class with view
+	NgForm Directive
+		a)NgForm directive is used with HTML <form> tag
+		b)To understand NgForm, we should be aware with following classes
+			FormControl:This class tracks the value and validation status of an individual form control
+			FormGroup:This class tracks the value and validity state of a group of FormControl
+		c)NgForm is a directive that creates a top-level FormGroup instance and binds it to a form to 
+		  track aggregate form value and validation status
+		d)import {FormsModule} from '@angular/forms'
+		e)We can export NgForm into a local template variable
+		f)To import it we need to use NgForm as ngForm
+			<form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
+			userForm.controls['name'].value
+			userForm.valid
+			userForm.submitted
+		g)To reset form, NgForm has resetForm() method that is called as follows.
+			resetUserForm(userForm: NgForm) {
+     			 userForm.resetForm();;
+  			} 
+		h)If we want to reset form with some default values, then assign 
+		  the default values with form control name of the form
+			resetUserForm(userForm: NgForm) {
+   				userForm.resetForm({
+      				name: 'Mahesh',
+      				city: 'Noida'
+  			 });
+			} 
+		i)
+	NgModel Directive
+		1.NgModel directive creates a FormControl instance from a domain model created in class 
+		  and binds it to a form control element
+		2.FormControl keeps the track of user interaction and validation status of the form control. 
+		3.NgModel can be used standalone as well as with the parent form.
+		4.When it is used as standalone, we can use it as follows
+			<input [(ngModel)]="name" required #userName="ngModel">
+			<p>Name value :{{name}}</p>	
+			<p>Name value: {{ userName.value }} </p>
+			<p>Name valid: {{ userName.valid }} </p> 
+		5. In one way binding using [ ] 
+		6.In two way binding using [()]
+	NgForm with NgModel
+		1.When we are using parent form, we need not to use two-way binding to get form 
+		  fields values in our class
+		2.We can pass <form> local template variable such as userForm to our submit 
+		  method such as onFormSubmit(userForm) as given below.
+		  <form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
+		Case-1: Here we are using two-way binding in parent form
+			<form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
+			<input name="message" [(ngModel)]="msg">
+			If we want form fields values using domain model then we can use two-way binding
+			On form submit we can also access form values using NgForm in our class.
+			In case of parent form, most of the time, we need not to use two-way binding because 
+			 we can access values in our class using NgForm itself.
+			name attribute is required to register control with form. 
+		Case-2: Here we are using one-way binding in parent form.
+			<form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
+			<input name="message" [ngModel]="msg">
+			<button>Submit</button>
+			</form>
+			We should use one-way binding in the scenario where we want to pre-populate form fields.
+		Case-3: Here we are using neither one-way nor two way binding.
+			<form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
+			<input name="message" ngModel>
+			<button>Submit</button>
+			</form>
+			To register child control with the form, we need to use ngModel as field attribute
+Angular 2 FormControl Example
+	1.It is used to create angular reactive form
+	2.FormControl can be used standalone as well as with HTML form tag			
+	3.Angular uses three fundamental block to create angular reactive form that are 
+	 FormControl, FormGroup and FormArray
+		FormControl: It is a class that is used to get and set values and validation of 
+			     a form control such as <input> and <select> tag. 
+		FormGroup:It has the role to track value and validity state of group of FormControl
+		FormArray:It tracks the value and validity state of array of FormControl, 
+			  FormGroup or FormArray instances
+	ReactiveFormsModule
+		1.To enable reactive form in our angular application we need to 
+		  configure ng module ReactiveFormsModule in application module.
+		Reactive Form :
+			Creating form using FormControl, FormGroup and FormArray is said to be reactive form
+			They use ng module as ReactiveFormsModule. 
+		Template-Driven Form
+			Creating form using NgForm and NgModel, is said to be template-driven form
+			They use ng module as FormsModule. 
+		ReactiveFormsModule and FormsModule both belong to @angular/forms library
+	FormControl
+		1.FormControl is used to track values and validation of a form control
+		2.When we work with FormControl class, FormControlDirective and
+		  FormControlName directives are also used. 
+		FormControlDirective
+			a)It syncs a standalone FormControl instance to form a control element
+		FormControlName
+			a)It is used with FormGroup with a <form> tag
+			b)FormControlName syncs a FormControl in an existing FormGroup to a form control by name. 
+		city=new FormControl();
+		<input [formControl]="city">
+	Default Value
+		1.If we want to set a default value to our form control, we can pass a default value
+		  while instantiating a FormControl in our class
+			city=new FormControl('Noida')
+			married=new FormControl(true)
+		2.In HTML template, we will use these properties with form control
+			<input [formControl]="city">
+			<input type="checkbox" [checked]="married.value" (change)="changeValue()">
+	Get and Set Value
+		setCityValue(){
+		this.city.setValue('Varanasai')
+		}
+	Disable FormControl
+		country = new FormControl({value: 'India', disabled: true});
+	
+	FormControl with FormGroup using FormControlName
+		1.userForm = new FormGroup({
+		name: new FormControl('Mahesh', Validators.maxLength(10)),
+		age: new FormControl(20, Validators.required),
+		city: new FormControl(),
+		country: new FormControl()
+ 		}); 
+		2.The HTML code will be as given below
+			<form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+    			Name: <input formControlName="name"  placeholder="Enter Name">
+    			Age: <input formControlName="age"  placeholder="Enter Age">
+    			City: <input formControlName="city"  placeholder="Enter City">
+    			Country: <input formControlName="country" placeholder="Enter Country">
+         		<button type="submit">Submit</button>
+ 			</form> 
+			this.userForm.get('name').value
+Angular 2 FormGroup Example
+	1.FormGroup takes part in creating reactive form
+	2.FormGroup is used with FormControl and FormArray. 
+	3.the role of FormGroup is to track the value and validation state of form control. 
+	FormControl
+		1.It is a class that tracks 
+
+Angular 2 Routing and Navigation Example
+	Understanding Routing and Navigation API
+		1.Angular routing provides services, directives and operators that manage 
+		  the routing and navigation in our application
+	RouterModule and Routes
+		1.RouterModule is a separate module in angular that provides required services 
+		  and directives to use routing and navigation in angular application.
+		2.Routes defines and array of roots that map a path to a component. 
+		3.import { RouterModule, Routes } from '@angular/router'; 
+		4.const routes:Routes=[
+			{path:'manage-book',component:ManageBookComponent},
+			{path:'update-book/:id',component:UpdateBookComponent},
+			{path:'',redirectTo:'/manage-book',pathMatch:'full'},
+			{path:'**',component:PageNotFoundComponent}
+
+		]
+		5.Using RouterModule.forRoot()
+			imports:[RouterModule.forRoot(routes)]
+	Router
+		1.It is used to navigate from one component to another component
+		2.import {Router} from '@angular/router'
+		3.Router Instance: Make Router service available in component 
+		   using dependency injection with constructor
+			constructor(private router:Router){}
+		4.Using Router navigate()
+			this.router.navigate(['/update-book',id]);
+	ActivatedRoute and Params
+		1.ActivatedRoute is an angular service that contains route specific 
+		  information such as route parameters, global query params etc.
+		2.Params is an angular router API that contains the parameter value.
+		3.To get the parameter value from Params we need to pass key.
+		4.import { ActivatedRoute, Params } from '@angular/router'; 
+		5.constructor(private route:ActivatedRoute){}
+	Location
+		1.Location is a service that is used to interact with browser URL for 
+		  example navigating back and forward
+		2.Location has methods such as go(), forward() and back() etc.
+		3.import {Location} from '@angular/common'
+		4.constructor(privte location:Location){}
+		5.this.location.back();
+	RouterLink and RouterLinkActive
+		1.RouterLink is a directive that is used to bind a route with clickable HTML element.
+		2.RouterLinkActive is a directive that is used to add or remove CSS classes. 
+		3.When the HTML element with RouterLink binding is clicked then the CSS classes 
+		  bound with RouterLinkActive will be active.
+		4.<a routerLink="/manage-book" routerLinkActive="active-link">Manage Book</a>
+		5.<a [routerLink]="['/view-detail',book.id]">View Detail</a>
+	RouterOutlet
+		1.RouterOutlet is a directive that is used as <router-outlet>.
+		2.The role of <router-outlet> is to mark where the router displays a view
+		3.<router-outlet></router-outlet>	
+
+Angular 2/4 Child Routes and Relative Navigation Example
+	1.A route can have one or more than one child routes. 
+	2.Child routes can have their own child routes and so on
+	3.Route has different properties to handle route such as path, component, 
+	  outlet, children, loadChildren etc.
+	4.To create child route for a route, we need to use children property. 
+	5.To load child module lazily in application module, we need to use loadChildren property
+	6.Module can be loaded eagerly, lazily and preloaded.
+	7.In lazy loading and preloading, modules are loaded asynchronously.
+	8.Child can have path parameters and also it can have empty path
+	9.Router supports relative path using ActivatedRoute.
+	10. When we navigate to a route using Router.navigate() method then we need to pass 
+	    instance of ActivatedRoute using relativeTo property
+	11.When we navigate to a route using RouterLink directive, we need not to pass instance of 
+	   ActivatedRoute because RouterLink automatically supports ActivatedRoute
+	Properties of Angular Routes Array
+		path:Defines path for a component
+		component:Name of the component
+		outlet:Name of the outlet component should be placed into
+		data:Additional data provided to component via ActivatedRoute
+		children: Array of child route definitions
+		loadChildren: Reference to lazy loaded child routes.
+		redirectTo: Defines a URL to redirect current matched URL
+	Eager Loading of Modules
+		1.Eager loading is loading modules before application starts
+		2.Our main application module (i.e. AppModule) always loads eagerly.
+		3.To load feature modules eagerly we need to import them into AppModule
+		4.We have two feature modules in our example i.e. CountryModule and PersonModule.
+		5.We will import them into AppModule as following
+	Lazy Loading of Modules
+		1.Lazy loading is loading modules on demand
+		2.To load modules lazily we need to use loadChildren property
+		3.Find the steps to load our CountryModule and PersonModule lazily. 
+		4.Do not import CountryModule and PersonModule in AppModule
+		5.Use loadChildren property in AppRoutingModule as following
+			{path:'country',loadChildren:'app/country/country.module#CountryModule'
+		6.Make parent path empty in PersonRoutingModule and CountryRoutingModule
+	Preloading of Modules
+		1.Preloading is loading modules in background just after application starts.
+		2.To preload modules we need do a slight change in our lazy loading module code.
+		3.Do not import CountryModule and PersonModule in AppModule
+		4.Use loadChildren property in AppRoutingModule as we did in lazy loading
+		5.Configure PreloadAllModules strategy using forRoot as following
+			RouterModule.forRoot(routes,
+				{
+				   preloadingStrategy:PreloadAllModules
+				})
+		6.PreloadAllModules is imported from @angular/router library
+		7.PreloadAllModules preloads all modules that are configured with loadChildren property.
+	Relative Navigation
+		1.Angular router supports relative navigation
+		2.relative navigation using Router.navigate() method and RouterLink directive
+		Using Router.navigate() method
+			1.To pass ActivatedRoute we need to use relativeTo property
+			2.To get the instance of ActivatedRoute and Router use the constructor.
+			this.router.navigate([ '../list/view', country.countryId ], { relativeTo: this.route });
+			If we want to use absolute path,then write the full path
+				this.router.navigate(['/country/list/view', country.countryId]); 
+	Using RouterLink Directive 
+		1.RouterLink directive has support of ActivatedRoute automatically for relative navigation
+		2.We can use relative path and absolute path both with RouterLink directive. 
+		3.<a [routerLink]="['../list/view', country.countryId]" routerLinkActive="active">View</a>
+		4.Using absolute path
+			<a [routerLink]="['/country/list/view', country.countryId]" routerLinkActive="active">View</a>
+
+Angular 2/4 Named Router Outlet + Popup Example
+	1.Named outlet is used to perform a task in popup view.
+	2.The named outlet will stay open even when we switch between pages in the application
+	3.Named outlet will close only when we close it. 
+	4.Named outlet is that outlet which is given a name using name attribute in <router-outlet> tag. 
+	5.Named outlet can be more than one per template.
+	6.More than one named outlet can stay open together.
+	7.Named outlet uses secondary routes to open a component
+	8.Secondary routes are independent of primary route
+	9.We can navigate to named outlet using RouterLink directive as well as Router.navigate() method
+	10.Named outlet will close only when we pass null path to it
+	Creating Named Outlet
+		<router-outlet></router-outlet>	 //primary outlet
+		<router-outlet name="bookList"></router-outlet>
+		<router-outlet name="bookPopup"></router-outlet> 
+	Creating Routes for Named Outlet
+		{
+			path:'add-book',component:AddBookComponent,outlet:'bookPopup'
+		},
+		{
+		        path:'update-book/:book-id',component:BookUpdateComponent,outlet:'bookPopup'
+		}
+	Navigate to Named Outlet
+		<a [routerLink]="[{outlets:{bookPopup:['update-book']}}]">
+		<a [routerLink]="[{outlets:{bookPopup:[book.id]}}]">
+		Using Router.navigate()
+			this.router.navigate([{outelets:{bookPopup:['update-book']}}]
+			this.router.navigate([{outlets:{bookPopup:[book.id]}}]);
+	CLose Named Outlet
+		close(){
+			this.router.navigate([{outlets:{bookPopup:null}}]);
+			}
+	Secondary routes
+		1.Named outlet will open as secondary route within a ().
+		2.http://localhost:4200/book(bookPopup:add-book) 
+		(bookPopup:add-book) //secondary routes
+		
+		}
+
+Angular 2/4 Route Guards: CanActivate and CanActivateChild Example
+	1.CanActivate and CanActivateChild are interfaces and have methods canActivate() 
+	  and canActivateChild() respectively
+	2.These methods return Boolean value.
+	3.CanActivate is used for authentication and CanActivateChild is used for authorization.
+	4.To use route guards in our application, we need to create a service and implement 
+	  these interfaces and define their methods
+	5.Angular Route interface provides canActivate and canActivateChild properties to 
+	  configure service class which is implementing CanActivate and CanActivateChild interfaces
+	Route Guards
+		1.Guarding routes means whether we can visit the route or not
+		2.To achieve route guards, Angular provides following interfaces 
+		   that are contained in @angular/router package
+			a)CanActivate
+			b)CanActivateChild
+			c)CanDeactivate
+			d)Resolve
+			e)CanLoad
+		3.CanActivate decides whether we can navigate to a route or not
+		4.It is used to redirect to login page to require authentication
+		5.CanActivateChild decides whether we can navigate to child routes or not
+		6.It is used to decide link access on the basis of authorization
+	Using CanActivate
+		1.CanActivate is an Angular interface
+		2.It is used to force user to login into application before navigating to the route. 
+		3.CanActivate interface has a method named as canActivate() which has following arguments
+			ActivatedRouteSnapshot
+				-Contains the information about a route associated with component
+				 loaded in outlet in particular time
+				-It can traverse router state tree
+			RouterStateSnapshot:
+				-It is a tree of activated route snapshots.
+				-It has url property that gives the URL from which this snapshot was created. 
+		4.canActivate() returns boolean value or Observable or Promise of boolean value
+		5.We need to create a service implementing CanActivate interface and override canActivate() method
+			@Injectable()
+			export class AuthGuardService implements CanActivate{
+				canActivate(route:ActivatedRouteSnapshot,state:RouterStateSnapshot):boolean{
+					return true;
+				}
+			}
+		6.canActivate property used in route declarations.
+			{path:'home',component:DashboardLayoutComponent,canActivate:[AuthGuardService]}
+		7.If canActivate() method from AuthGuardService returns true only when route can be navigated
+		8.In case of false value, navigation can be redirected to login page. 
+	Using CanActivateChild
+		1.CanActivateChild is an Angular interface to guard child routes
+		2.Suppose a user has been authenticated but not authorized to visit the 
+		   child routes, so child routes can be guarded using CanActivateChild
+		3.Method signature of canActivateChild() is the same as canActivate()
+		4.We need to create a service implementing CanActivateChild and override canActivateChild() method
+			@Injectable()
+			export class AuthGuardService implements CanActivate,CanActivateChild{
+				canActivate(route:ActivatedRouteSnapshot,state:RouterStateSnapshot):boolean{
+					return true;
+				}
+			canActivateChild(route:ActivateRouteSnapshot,state:RouterStateSnapshot):boolean{
+				return true;
+			}	}
+			
+		5.canActivateChild property used in route declarations.
+			{ path:'list',component:ArticleListComponent,
+			  canActivateChild:[AuthGuarService],
+			  children:[{path:':id',component:ArticleEditComponent}]
+Angular CanDeactivate Guard Example
+	1.CanDeactivate is an interface that is implemented by a class to create a 
+	  guard which decides if a route can be deactivated
+	2.The guard can be added to any component route using canDeactivate attribute
+	  of Angular Route interface
+	3.Any component which needs to use CanDeactivate guard, has to define
+	  canDeactivate method and that will be called by guard class that has
+	  been created implementing CanDeactivate interface.
+	4.We can also create component-specific CanDeactivate guard
+	5.CanDeactivate guard can be used in the scenario, for example, suppose a 
+	  user is changing form data and before saving, user tries to navigate away.
+	6.In this scenario we can use CanDeactivate guard which will deactivate 
+	   the route and open a Dialog Box to take user confirmation
+	CanDeactivate Interface
+		1.CanDeactivate interface is a route guard to decide if a route can deactivated.
+		2.CanDeactivate interface has a method canDeactivate that
+		  accepts arguments as given below
+			a.Component for which route is to be activated
+			b.ActivatedRouteSnapshot
+			c.RouterStateSnapshot
+			d.RouterStateSnapshot
+		3.canDeactivate method will return Observable<boolean> or Promise<boolean> or boolean
+		Steps to Create CanDeactivate Guard for any Component
+			-To use CanDeactivate in our application, we need to create a guard.
+			-This will be a service decorated with @Injectable() and will define canDeactivate() 
+			 method
+			Create Service for CanDeactivate Guard
+			Configure CanDeactivate Guard Service in Application Routing Module
+			providers:[CanDeactivateGuard]	
