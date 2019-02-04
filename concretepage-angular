@@ -494,3 +494,170 @@ Angular CanDeactivate Guard Example
 			Create Service for CanDeactivate Guard
 			Configure CanDeactivate Guard Service in Application Routing Module
 			providers:[CanDeactivateGuard]	
+Angular Resolve Guard Example
+	1.Angular provides Resolve interface with resolve method declaration.
+	2.To create a Angular Resolve guard, we need to create a class by 
+	  implementing Resolve interface.		
+	3.Resolve guard is used in the scenario where before navigating to 
+	  any route we want to ensure whether there is data available or not.
+	4.If there is no data then it has no meaning to navigate there
+	5.It means we have to resolve data before navigating to that route.
+	6.The resolve method can return Observable or Promise or a synchronous value.
+	Resolve Interface
+		a.t has a method named as resolve with arguments ActivatedRouteSnapshot 
+		  and RouterStateSnapshot.
+	Resolve with Observable
+		We will provide here how to use Resolve interface with Observable.
+		step-1:
+			-Create a class implementing Resolve interface
+			-Suppose we want to display country list and on the click of country,
+			 we will display country detail using country id
+			-If there is no data for the country id then we want to remain on the same route
+			@Injectable()
+			export class CountryDetailResolver implements Resolve<Country>{
+			     constructor(private countryService: CountryService, private router: Router) { }
+			     resolve()
+			}
+		step-2:
+			-We need to configure this resolver class in providers metadata of @NgModule decorator as following
+			-@NgModule({ providers:[CountryDetailResolver]})
+		step-3
+			-Now we will configure our CountryDetailResolver in route configurations 
+			 using resolve property of Angular Route interface
+			-resolve:{countryDetail:CountryDetailResolver}
+Angular Module Loading: Eager, Lazy and Preloading
+	1.A module can be loaded eagerly, lazily and preloaded. 
+	2.Eager loading is loading modules before application starts.
+	3.Lazy loading is loading modules on demand
+	4.Preloading is loading modules in background just after application starts
+	5.In lazy loading and preloading, modules are loaded asynchronously. 
+	6.The application module i.e. AppModule is loaded eagerly before application starts.
+	7.But the feature modules can be loaded either eagerly or lazily or preloaded. 
+	Eager loading
+		a.To load a feature module eagerly we need to import it into 
+		  application module using imports metadata of @NgModule decorator.				
+		b.Eager loading is useful in small size applications.
+		c.In eager loading, all the feature modules will be loaded before the 
+		  application starts.
+		d.Hence the subsequent request to the application will be faster.
+		e.When a module is loaded, it loads all the imported modules,
+		  configured components, services, custom pipes etc
+		f.Modules are loaded in the order they are configured in imports metadata
+		g.Eager loading is good for small applications because at the first hit 
+		  of the application all the modules are loaded and all the
+		  required dependencies are resolved.
+		h.Now the subsequent access to the application will be faster
+		i.
+	Lazy loading
+		a.To load a feature module lazily we need to load it using loadChildren
+		  property in route configuration and that feature module must not 
+		  be imported in application module
+		b.Lazy loading is useful when the application size is growing
+		c.In lazy loading, feature module will be loaded on demand 
+		  and hence application start will be faster. 
+		d.When the modules are loaded on-demand, then it is called lazy loading
+		e.const routes:Routes=[{path:'country','loadChildre:'app/country/country.module#CountryModule'}]
+	Preloading
+		a.To preload a feature module we need to load it using loadChildren 
+		  property and configure preloadingStrategy property with RouterModule.forRoot. 
+		b.That feature module must not be imported in application module. 
+		c.When we assign Angular PreloadAllModules strategy to preloadingStrategy property, 
+		  then all feature modules configured with loadChildren, are preloaded.
+		d.To preload selective modules, we need to use custom preloading strategy
+		e.We should preload only those features which will be visited by users
+		  just after application start and rest feature modules can be loaded lazily
+		f.in this way we can improve the performance of our bigger size application. 
+		g.In preloading, feature modules are loaded in background asynchronously
+		h.In preloading, modules start loading just after application starts. 
+		i.@NgModule({imports:[RouterModule.forRoot(routes,{preloadStrategy:PreloadAllModules})]})
+
+Angular Custom Preloading Strategy
+	1.Preloading is loading modules in background just after application starts. 
+	2.In preloading, modules are loaded asynchronously
+	3.Angular provides in-built PreloadAllModules strategy that loads all feature 
+	  modules configured with loadChildren in application routing module as quickly as possible. 	
+	4.Custom preloading strategies allow to preload selective modules.
+	5.We can also customize to preload modules after a certain delay once application starts
+	6.To create a custom preloading strategy, Angular provides PreloadingStrategy class 
+	  with a preload method.
+	7.We need to create a service by implementing PreloadingStrategy 
+	  and then overriding its preload method.
+	8.To enable custom preloading strategies, we need to configure 
+	  our preloading strategy service with RouterModule.forRoot 
+	  using preloadingStrategy property.	
+	9.We will also configure our preloading strategy service into providers 
+	  metadata in application routing module. 
+	Preloading
+		a.const routes:Routes=[path:'country',loadChildren:'app/country/country.module#CountryModule'}]
+		b.We must not import our feature modules such as CountryModule 
+		  in application module i.e. AppModule
+		c.RouterModule.forRoot(routes,preloadingStrategy:NoPreloading})
+	Custom Preloading Strategy
+		a.class PreloadingStrategy{preload()}
+		b.const routes:Routes=[path:'country',
+		  loadChildren:'app/country/country.module#CountryModule'
+		  data:{preload:true}	 
+		}]
+		c.data: { preload: true, delay: true } 
+		d.Create a service by implementing PreloadingStrategy class and override its preload method
+		  @Injectable()
+		  export class CustomPreloadingStrategy implements PreloadingStrategy{}
+Angular CanLoad Guard Example
+	1.CanLoad guard is used to decide if a module can be loaded or not configured 
+	  with loadChildren property.
+	2.CanLoad is an interface with canLoad method
+	3.To use CanLoad guard we need to create a service by implementing 
+	  CanLoad interface and override its canLoad method
+	4.Then that service will be configured with canLoad property in 
+	  route configuration with loadChildren
+	5.When canLoad method of our service returns true then the feature 
+	  module protected by canLoad will be lazy loaded otherwise it will not be loaded.
+	6.CanLoad takes precedence on preloading and preloading is blocked by CanLoad guard
+	7.Modules protected by CanLoad has no effect of preloading configuration
+	8.Here on this page we will protect a feature module using CanLoad guard 
+ 	  and allow to load it only after user authentication
+	9.We will also provide example for how to use CanLoad and CanActivate guard together.
+	CanLoad
+		1.CanLoad is a route guard to decide if a module can be loaded
+	 	  configured with loadChildren property
+		2.loadChildren property is a reference to lazy loaded child routes.
+		3.If canLoad method of our service returns true then that module will
+		 start loading otherwise it will not be loaded.
+	Steps to use CanLoad Guard
+		Step-1
+			a.Create a service implementing CanLoad interface and override canLoad method.
+Angular Custom Error Handler
+	1.Angular provides ErrorHandler class for centralized exception handling.
+	2.We create custom error handler service by implementing ErrorHandler class.
+	3.It has a method handleError(error) that executes whenever the application 
+	  throws error anywhere in the application
+	4.We need to override it to define our custom error handler.
+	5.We can use our custom error handler as global error handler
+	6.ErrorHandler is created before the providers. 
+	7.So we need Injector to get instance of any service within custom error handler.
+	8.If our application is using routing then to get URL in custom error handler,
+	  we should use Router otherwise we can use Location
+	ErrorHandler
+		1.Angular ErrorHandler class is used for centralized exception handling.
+		2.The default implementation of ErrorHandler prints error messages to browser console.
+		3.We implement this class to create custom error handler.
+		4.class ErrorHandler{
+			handleError(error:any):void
+		   }
+	Steps to Create Custom Error Handler
+		Step-1:Create a service by implementing ErrorHandler and overriding its handleError() method.
+			 Here we are creating GlobalErrorHandlerService as custom error handler.
+			import {Injectable,ErrorHandler} from '@angular/core';
+			import {HttpErrorResponse} from '@angular/common/http'
+			@Injectable()
+			export class GlobalErrorHandlerService implements ErrorHandler {
+				handleError(error: any) {
+					if (error instanceof HttpErrorResponse) {
+					    console.error('Backend returned status code: ', error.status);
+					    console.error('Response body:', error.message);  
+					}else{
+						console.error('An error occurred:', error.message);}
+		Step-2:We need to configure our GlobalErrorHandlerService in application module in providers 			
+			metadata of @NgModule as following
+			@NgModule({
+				providers:[GlobalErrorHandlerService,{provide:ErrorHandler,useClass: GlobalErrorHandlerService}]
